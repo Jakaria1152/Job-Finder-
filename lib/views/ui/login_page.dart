@@ -40,7 +40,14 @@ child: GestureDetector(
           padding: EdgeInsets.zero,
           children: [
 SizedBox(height: 50,),
-            ReusableText(text: 'Welcome Back!', style: TextStyle(fontSize: 30,fontWeight: FontWeight.w600, color: Colors.black))
+            ReusableText(text: 'Welcome Back!', style: TextStyle(fontSize: 30,fontWeight: FontWeight.w600, color: Colors.black)),
+            ReusableText(text: 'Fill the details to login to your account', style: TextStyle(
+              color: Colors.grey,
+              fontSize: 16,
+              fontWeight: FontWeight.w600
+            )),
+            SizedBox(height: 50,),
+
           ],
         ),
       ),
