@@ -1,38 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_finder_app/controllers/login_provider.dart';
-import 'package:job_finder_app/views/common/app_bar.dart';
-import 'package:job_finder_app/views/common/custom_button.dart';
-import 'package:job_finder_app/views/common/custom_text_field.dart';
-import 'package:job_finder_app/views/common/reusable_text.dart';
-import 'package:job_finder_app/views/ui/registration_page.dart';
+import 'package:job_finder_app/controllers/sign_up_notifier.dart';
+import 'package:job_finder_app/views/ui/login_page.dart';
 import 'package:provider/provider.dart';
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+
+import '../common/app_bar.dart';
+import '../common/custom_button.dart';
+import '../common/custom_text_field.dart';
+import '../common/reusable_text.dart';
+
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController email = TextEditingController();
+class _RegistrationPageState extends State<RegistrationPage> {
+  final TextEditingController name = TextEditingController();
   final TextEditingController password = TextEditingController();
+  final TextEditingController email = TextEditingController();
 
   @override
-  void dispose() {  // dispose for release memory
+  void dispose() {
     // TODO: implement dispose
     super.dispose();
     email.dispose();
+    name.dispose();
     password.dispose();
   }
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginNotifier>(
-      builder: (context, loginNotifier, child) {
+    return Consumer<SignUpNotifier>(
+      builder: (context, signUpNotifier, child) {
         return Scaffold(
 
-          appBar: PreferredSize(preferredSize: const Size.fromHeight(50),
-            child: CustomAppbar(text: 'Login',
+          appBar: PreferredSize(preferredSize: Size.fromHeight(50),
+            child: CustomAppbar(text: 'Sign Up',
               child: GestureDetector(
                   onTap: null,
                   child: Container()
@@ -41,18 +45,32 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                const SizedBox(height: 50,),
-                ReusableText(text: 'Welcome Back!', style: const TextStyle(fontSize: 30,fontWeight: FontWeight.w600, color: Colors.black)),
-                ReusableText(text: 'Fill the details to login to your account', style: const TextStyle(
+                SizedBox(height: 50,),
+                ReusableText(text: 'Hello, Welcome!', style: TextStyle(fontSize: 30,fontWeight: FontWeight.w600, color: Colors.black)),
+                ReusableText(text: 'Fill the details to signup to your account', style: TextStyle(
                     color: Colors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w600
                 )),
-                const SizedBox(height: 50,),
+                SizedBox(height: 50,),
+                CustomTextField(controller: name,
+                  hintText: "Full Name",
+                  keyboardType: TextInputType.text,
+                  validator: (name){
+                    if(name!.isEmpty )  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
+                        {
+                      return "Please enter your name";
+                    }
+                    else{
+                      return null!;
+                    }
+                  },
+                ),
+                SizedBox(height: 20,),
                 CustomTextField(controller: email,
                   hintText: "Email",
                   keyboardType: TextInputType.emailAddress,
@@ -66,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                 ),
-                const SizedBox(height: 20,),
+                SizedBox(height: 20,),
                 CustomTextField(controller: password,
                   hintText: "Password",
                   keyboardType: TextInputType.text,
@@ -79,28 +97,29 @@ class _LoginPageState extends State<LoginPage> {
                       return null!;
                     }
                   },
-                  obscureText: loginNotifier.obsecureText,
+                  obscureText: signUpNotifier.obsecureText,
                   suffixIcon: GestureDetector(
                     onTap: (){
-                      loginNotifier.obsecureText = !loginNotifier.obsecureText;
+                      signUpNotifier.obsecureText = !signUpNotifier.obsecureText;
                     },
-                    child:loginNotifier.obsecureText ? const Icon(Icons.visibility_off,color: Colors.black,) : const Icon(Icons.visibility,color: Colors.black,),
+                    child:signUpNotifier.obsecureText ? Icon(Icons.visibility_off,color: Colors.black,) : Icon(Icons.visibility,color: Colors.black,),
                   ),
                 ),
-                const SizedBox(height: 10,),
+
+                SizedBox(height: 10,),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
-                    onTap: ()=>Get.to(const RegistrationPage()),
-                    child: ReusableText(text: "Register",style: const TextStyle(
+                    onTap: ()=>Get.to(LoginPage()),
+                    child: ReusableText(text: "Login",style: TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                         fontWeight: FontWeight.w500
                     ),),
                   ),
                 ),
-                const SizedBox(height: 50,),
-                CustomButton(text: 'Login',
+                SizedBox(height: 50,),
+                CustomButton(text: 'Sign Up',
                     onTap: (){
 
                     }
