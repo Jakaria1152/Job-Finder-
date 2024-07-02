@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController password = TextEditingController();
 
   @override
-  void dispose() {  // dispose for release memory
+  void dispose() {  // dispose use for release memory
     // TODO: implement dispose
     super.dispose();
     email.dispose();
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   validator: (password){
                     if(password!.isEmpty || password.length<7)  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
                         {
-                      return "Please enter at least 6 digit pasword";
+                      return "Please enter at least 6 digit password";
                     }
                     else{
                       return null!;
