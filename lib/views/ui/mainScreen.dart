@@ -21,7 +21,7 @@ return ZoomDrawer(
     borderRadius: 30,
     showShadow: true,
     angle: 0.0,
-    slideWidth: 250,
+    slideWidth: 250,  // aita menu item side er width
     menuBackgroundColor: Colors.lightBlue,
     menuScreen: DrawerScreen(
       indexSetter: (index){

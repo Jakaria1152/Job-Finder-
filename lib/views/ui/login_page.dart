@@ -5,6 +5,7 @@ import 'package:job_finder_app/views/common/app_bar.dart';
 import 'package:job_finder_app/views/common/custom_button.dart';
 import 'package:job_finder_app/views/common/custom_text_field.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
+import 'package:job_finder_app/views/ui/mainScreen.dart';
 import 'package:job_finder_app/views/ui/registration_page.dart';
 import 'package:provider/provider.dart';
 class LoginPage extends StatefulWidget {
@@ -102,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50,),
                 CustomButton(text: 'Login',
                     onTap: (){
-
+Get.to(MainScreen());
                     }
                 )
 

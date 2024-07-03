@@ -24,7 +24,7 @@ class myApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Job finder app',
-      home: MainScreen(),
+      home: LoginPage(),
     );
   }
 }
