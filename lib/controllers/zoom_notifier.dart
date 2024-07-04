@@ -7,8 +7,10 @@ class ZoomNotifier extends ChangeNotifier{
 
   set currentIndex(int newIndex){
     _currentIndex = newIndex;
-    ChangeNotifier();
+
+    notifyListeners();
 
   }
+
 
 }

@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
 import 'package:job_finder_app/views/common/drawer/drawerScreen.dart';
+import 'package:job_finder_app/views/ui/BookMarkPage.dart';
+import 'package:job_finder_app/views/ui/chatspage.dart';
+import 'package:job_finder_app/views/ui/device_management_page.dart';
 import 'package:job_finder_app/views/ui/homePage.dart';
+import 'package:job_finder_app/views/ui/profile_page.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
@@ -25,7 +29,8 @@ return ZoomDrawer(
     menuBackgroundColor: Colors.lightBlue,
     menuScreen: DrawerScreen(
       indexSetter: (index){
-        zoomNotifier.currentIndex = index;
+
+         zoomNotifier.currentIndex = index;
       },
     ),
     mainScreen: currentScreen()
@@ -38,17 +43,17 @@ return ZoomDrawer(
     var zoomNotifier = Provider.of<ZoomNotifier>(context);
     switch(zoomNotifier.currentIndex){
       case 0:
-        return HomePage();
+        return const HomePage();
       case 1:
-        return HomePage();
+        return const ChatsPage();
       case 2:
-        return HomePage();
+        return const BookMarkPage();
       case 3:
-        return HomePage();
+        return const DeviceManagementPage();
       case 4:
-        return HomePage();
+        return const ProfilePage();
       default:
-        return HomePage();
+        return const HomePage();
 
     }
 

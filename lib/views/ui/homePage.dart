@@ -29,6 +29,26 @@ class _HomePageState extends State<HomePage> {
           child: DrawerWidget(),
         ),),
       ),
+
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20,),
+                Text('Search\nFind & Apply',style: TextStyle(
+                  fontSize: 40, color: Colors.black,
+                  fontWeight: FontWeight.bold
+                ),),
+                SizedBox(height: 40,),
+
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
