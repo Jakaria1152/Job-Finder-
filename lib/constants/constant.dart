@@ -1,3 +1,6 @@
-// import 'package:get/get.dart';
-// final  width = Get.width*0.9;
+
+
+import 'package:flutter/cupertino.dart';
+
+// final  width = MediaQuery.of(context).size.width;
 // final height = Get.height * 0.065;
