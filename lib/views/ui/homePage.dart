@@ -5,6 +5,7 @@ import 'package:job_finder_app/views/common/drawer/drawerWidget.dart';
 import 'package:job_finder_app/views/common/heading_widget.dart';
 import 'package:job_finder_app/views/common/job_horizontal_tile.dart';
 import 'package:job_finder_app/views/common/searchWidget.dart';
+import 'package:job_finder_app/views/ui/Jobs/job_page.dart';
 import 'package:job_finder_app/views/ui/search_page.dart';
 
 import '../common/VerticalTile.dart';
@@ -79,7 +80,9 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 4,
                     itemBuilder: (context, index) => JobHorizontalTile(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(JobPage(title: "Facebook",id: "12",));
+                      },
                     ),
                   ),
                 ),
