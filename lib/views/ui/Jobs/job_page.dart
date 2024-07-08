@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_finder_app/constants/constant.dart';
 import 'package:job_finder_app/views/common/app_bar.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 
@@ -101,6 +102,20 @@ class _JobPageState extends State<JobPage> {
                 const SizedBox(height: 10,),
                 SizedBox(
                   height: MediaQuery.of(context).size.height*0.6,
+                  child: ListView.builder(
+                    itemCount: requirement.length,
+                    itemBuilder: (context, index) {
+                      final req = requirement[index];
+                      String bullet = "\u2022 ";
+
+                      return Text('$bullet $req\n',maxLines: 4,
+                      textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          fontSize: 16, color: Colors.grey, fontWeight: FontWeight.bold
+                        ),
+                      );
+
+                  },),
                 )
               ],
 
