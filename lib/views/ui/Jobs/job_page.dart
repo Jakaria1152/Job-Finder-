@@ -103,6 +103,7 @@ class _JobPageState extends State<JobPage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height*0.6,
                   child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: requirement.length,
                     itemBuilder: (context, index) {
                       final req = requirement[index];
@@ -119,7 +120,20 @@ class _JobPageState extends State<JobPage> {
                 )
               ],
 
-            )
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: OutlinedButton(style: OutlinedButton.styleFrom(backgroundColor: Colors.deepOrange,
+              foregroundColor: Colors.white
+              ),
+                onPressed: ()
+                {
+
+                },
+                child: Text('Apply Now'),
+              ),
+            ),
+            SizedBox(height: 20,)
           ],
         ),
       ),
