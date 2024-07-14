@@ -128,7 +128,7 @@ class _JobPageState extends State<JobPage> {
               ),
                 onPressed: ()
                 {
-
+print('apply now button click');
                 },
                 child: Text('Apply Now'),
               ),
