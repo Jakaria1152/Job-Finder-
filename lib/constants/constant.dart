@@ -16,3 +16,10 @@ List<String> requirement = [
 'Degree in software engineering, computer science, or software development is a plus.',
 'Nice to haves: Firebase, Azure DevOps, PWA (Progressive Web Apps).'
 ];
+
+List<String> skills =[
+  "Node.Js and Express.Js",
+  "Flutter and Dart",
+  "Firebase",
+  "Java"
+];

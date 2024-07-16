@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:job_finder_app/constants/constant.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 
 import '../common/app_bar.dart';
@@ -36,8 +37,8 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    child: Image.network(
-                      'https://media.licdn.com/dms/image/D5603AQH03bxq8Eec1g/profile-displayphoto-shrink_200_200/0/1705556728814?e=2147483647&v=beta&t=0usa9NKlZORkGFgUUUbFKGPUgVqDgbHtdMHMrXXEupc',
+                    child: Image.asset(
+                      'assets/images/profile.jpg',
                       width: 80,
                       height: 100,
                     ),
@@ -176,6 +177,46 @@ class ProfilePage extends StatelessWidget {
                     ),),
                   ],
                 ),
+              ),
+            ),
+            SizedBox(height: 20,),
+            Container(
+              color: Colors.grey.withOpacity(0.3),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ReusableText(text: 'Skills', style: TextStyle(
+                      fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600
+                    )),
+                  ),
+                  SizedBox(height: 3,),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.35,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: skills.length,
+                      itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+padding: EdgeInsets.symmetric(horizontal: 10),
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height*0.06,
+                          color: Colors.white,
+                          child: ReusableText(text: skills[index],style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              fontSize: 16
+                          ),),
+                        ),
+                      );
+                    },),
+                  ),
+                  )
+                ],
               ),
             )
           ],
