@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_finder_app/controllers/login_provider.dart';
+import 'package:job_finder_app/controllers/zoom_notifier.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/homePage.dart';
 import 'package:job_finder_app/views/ui/login_page.dart';
 import 'package:job_finder_app/views/ui/widget/devicesInfo.dart';
+import 'package:provider/provider.dart';
 
 import '../common/app_bar.dart';
 import '../common/drawer/drawerWidget.dart';
@@ -13,6 +16,7 @@ class DeviceManagementPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var zoomNotifier = Provider.of<ZoomNotifier>(context);
     final String date = DateTime.now().toString();
     var loginDate = date.substring(0,11);
 
@@ -66,16 +70,17 @@ class DeviceManagementPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 20),
               child: GestureDetector(
                 onTap: (){
+                  zoomNotifier.currentIndex = 0;
                   Get.to(LoginPage());
                 },
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: ReusableText(text: 'Sign Out of all devices', style: TextStyle(
-                    fontSize: 16, color: Colors.orange, fontWeight: FontWeight.w600
+                      fontSize: 16, color: Colors.orange, fontWeight: FontWeight.w600
                   )),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
