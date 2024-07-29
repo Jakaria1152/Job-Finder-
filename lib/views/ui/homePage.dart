@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SearchWidget(
                   onTap: () {
-                    Get.to(const SearchPage());
+                    Get.to( SearchPage());
                   },
                 ),
                 const SizedBox(
