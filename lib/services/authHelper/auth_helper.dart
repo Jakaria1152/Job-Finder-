@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as https;
 import 'package:job_finder_app/model/request/LoginModel.dart';
+import 'package:job_finder_app/model/response/auth/login%20response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config.dart';
 class AuthHelper{
@@ -17,6 +19,11 @@ static Future<bool> login(LoginModel model)async{
 
   if(response.statusCode == 200)
     {
+      final SharedPreferences pref = await SharedPreferences.getInstance();
+
+      String token = loginResponseModelFromJson(response.body).token;
+      String userId = loginResponseModelFromJson(response.body).id;
+      String profile = loginResponseModelFromJson(response.body).profile;
       return true;
     }
   else{
