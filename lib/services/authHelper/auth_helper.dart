@@ -24,6 +24,13 @@ static Future<bool> login(LoginModel model)async{
       String token = loginResponseModelFromJson(response.body).token;
       String userId = loginResponseModelFromJson(response.body).id;
       String profile = loginResponseModelFromJson(response.body).profile;
+
+      await pref.setString('token', token);
+      await pref.setString('userId', userId);
+      await pref.setString('profile', profile);
+      await pref.setBool('loggedIn', true);  // bar bar login screen show korbena aitar karone
+
+
       return true;
     }
   else{
