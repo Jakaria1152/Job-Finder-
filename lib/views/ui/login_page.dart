@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
+import 'package:job_finder_app/model/request/LoginModel.dart';
 import 'package:job_finder_app/views/common/app_bar.dart';
 import 'package:job_finder_app/views/common/custom_button.dart';
 import 'package:job_finder_app/views/common/custom_text_field.dart';
@@ -30,6 +31,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Consumer<LoginNotifier>(
       builder: (context, loginNotifier, child) {
+        loginNotifier.getPrefs();
+        // print(loginNotifier.loggedIn);
         return Scaffold(
 
           appBar: PreferredSize(preferredSize: const Size.fromHeight(50),
@@ -103,7 +106,20 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50,),
                 CustomButton(text: 'Login',
                     onTap: (){
-Get.to(MainScreen());
+                  if(loginNotifier.validateAndSave())
+                    {
+                      LoginModel model = LoginModel(
+                          email: email.text,
+                          password: password.text);
+                      loginNotifier.userLogin(model);
+                    }else{
+                    Get.snackbar("Sign Failed", "Please check your credentials",
+                        colorText: Colors.white,
+                        backgroundColor: Colors.red,
+                        icon: Icon(Icons.add_alert)
+                    );
+                  }
+//Get.to(MainScreen());
                     }
                 )
 
