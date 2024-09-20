@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:job_finder_app/constants/constant.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 
-import '../common/app_bar.dart';
-import '../common/drawer/drawerWidget.dart';
+import '../../common/app_bar.dart';
+import '../../common/drawer/drawerWidget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_finder_app/controllers/login_provider.dart';
 import 'package:job_finder_app/controllers/sign_up_notifier.dart';
-import 'package:job_finder_app/views/ui/login_page.dart';
+import 'package:job_finder_app/views/ui/auth/login_page.dart';
 import 'package:provider/provider.dart';
 
-import '../common/app_bar.dart';
-import '../common/custom_button.dart';
-import '../common/custom_text_field.dart';
-import '../common/reusable_text.dart';
+import '../../common/app_bar.dart';
+import '../../common/custom_button.dart';
+import '../../common/custom_text_field.dart';
+import '../../common/reusable_text.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -31,6 +32,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
   @override
   Widget build(BuildContext context) {
+    var loginNotifier = Provider.of<LoginNotifier>(context);
     return Consumer<SignUpNotifier>(
       builder: (context, signUpNotifier, child) {
         return Scaffold(
@@ -121,7 +123,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 SizedBox(height: 50,),
                 CustomButton(text: 'Sign Up',
                     onTap: (){
-
+loginNotifier.firstTime = !loginNotifier.firstTime;
                     }
                 )
 

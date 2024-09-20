@@ -4,7 +4,7 @@ import 'package:job_finder_app/controllers/login_provider.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/homePage.dart';
-import 'package:job_finder_app/views/ui/login_page.dart';
+import 'package:job_finder_app/views/ui/auth/login_page.dart';
 import 'package:job_finder_app/views/ui/widget/devicesInfo.dart';
 import 'package:provider/provider.dart';
 

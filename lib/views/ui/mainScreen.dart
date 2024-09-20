@@ -6,7 +6,7 @@ import 'package:job_finder_app/views/ui/BookMarkPage.dart';
 import 'package:job_finder_app/views/ui/chatspage.dart';
 import 'package:job_finder_app/views/ui/device_management_page.dart';
 import 'package:job_finder_app/views/ui/homePage.dart';
-import 'package:job_finder_app/views/ui/profile_page.dart';
+import 'package:job_finder_app/views/ui/auth/profile_page.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {

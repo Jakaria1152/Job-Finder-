@@ -7,7 +7,7 @@ import 'package:job_finder_app/views/common/custom_button.dart';
 import 'package:job_finder_app/views/common/custom_text_field.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/mainScreen.dart';
-import 'package:job_finder_app/views/ui/registration_page.dart';
+import 'package:job_finder_app/views/ui/auth/registration_page.dart';
 import 'package:provider/provider.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -106,19 +106,26 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50,),
                 CustomButton(text: 'Login',
                     onTap: (){
-                  if(loginNotifier.validateAndSave())
-                    {
-                      LoginModel model = LoginModel(
-                          email: email.text,
-                          password: password.text);
-                      loginNotifier.userLogin(model);
-                    }else{
-                    Get.snackbar("Sign Failed", "Please check your credentials",
-                        colorText: Colors.white,
-                        backgroundColor: Colors.red,
-                        icon: Icon(Icons.add_alert)
-                    );
-                  }
+
+                        // LoginModel model = LoginModel(
+                        //     email: email.text,
+                        //     password: password.text);
+                        // loginNotifier.userLogin(model);
+
+                  // i get form (null) error so i comment out this code
+                      if(loginNotifier.validateAndSave())
+                      {
+                        LoginModel model = LoginModel(
+                            email: email.text,
+                            password: password.text);
+                        loginNotifier.userLogin(model);
+                      }else{
+                        Get.snackbar("Sign Failed", "Please check your credentials",
+                            colorText: Colors.white,
+                            backgroundColor: Colors.red,
+                            icon: Icon(Icons.add_alert)
+                        );
+                      }
 //Get.to(MainScreen());
                     }
                 )
