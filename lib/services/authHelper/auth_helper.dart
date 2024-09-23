@@ -18,23 +18,18 @@ static Future<bool> login(LoginModel model)async{
     "Content-Type": "application/json"
   };
 try{
-  response = await http.post(Uri.parse('${Config.apiUrl}/api/login'),
+  response = await http.post(Uri.parse('${Config.apiUrl}${Config.loginUrl}'),
       body: jsonEncode({
         // backend a send korte gele middlewar er jonno jsonEncode korte hoi
         "email": model.email,
         "password": model.password // "email", "password" same as req.body in backend otherwise get error
       }), // body ta jsonEncode kora hosse toJson() call kore
-      headers: <String, String>{
-        'Content-type': 'application/json; charset=UTF-8',
-      });
+      headers: requestHeaders);
 }catch(e)
   {
     print('login api call error: $e');
   }
-  //var url = Uri.https('job-finderapp-backend-production.up.railway.app/api/login');
-  //var url = Uri.https(Config.apiUrl, Config.loginUrl);
- // var response = await client.post(url,headers: requestHeaders, body: jsonEncode(model));
-// print('url is ${url}');
+
   if(response!.statusCode == 200)
     {
       print('login success ${response.statusCode}');
