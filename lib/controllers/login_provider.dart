@@ -88,5 +88,8 @@ print('form is ${form}');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
     await prefs.setBool('loggedIn', false);
+
+    // akbar logout korar por jokhon abar login korbe tokhon jeno update profile a niye na jai ai jonno first time false kora hosse
+    _firstTime = false;
   }
 }

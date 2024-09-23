@@ -107,25 +107,26 @@ class _LoginPageState extends State<LoginPage> {
                 CustomButton(text: 'Login',
                     onTap: (){
 
-                        // LoginModel model = LoginModel(
-                        //     email: email.text,
-                        //     password: password.text);
-                        // loginNotifier.userLogin(model);
-
-                  // i get form (null) error so i comment out this code
-                      if(loginNotifier.validateAndSave())
-                      {
                         LoginModel model = LoginModel(
                             email: email.text,
                             password: password.text);
+
                         loginNotifier.userLogin(model);
-                      }else{
-                        Get.snackbar("Sign Failed", "Please check your credentials",
-                            colorText: Colors.white,
-                            backgroundColor: Colors.red,
-                            icon: Icon(Icons.add_alert)
-                        );
-                      }
+
+                  // i get form (null) error so i comment out this code
+                  //     if(loginNotifier.validateAndSave())
+                  //     {
+                  //       LoginModel model = LoginModel(
+                  //           email: email.text,
+                  //           password: password.text);
+                  //       loginNotifier.userLogin(model);
+                  //     }else{
+                  //       Get.snackbar("Sign Failed", "Please check your credentials",
+                  //           colorText: Colors.white,
+                  //           backgroundColor: Colors.red,
+                  //           icon: Icon(Icons.add_alert)
+                  //       );
+                  //     }
 //Get.to(MainScreen());
                     }
                 )
