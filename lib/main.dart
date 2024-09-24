@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
@@ -9,12 +10,16 @@ import 'package:job_finder_app/views/ui/mainScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase_options.dart';
+
 
 //Widget defaultHome = const OnboardingScreen(); this is use for knowledge
 Widget defaultHome = const LoginPage();
 void main()async{
   WidgetsFlutterBinding.ensureInitialized(); //used to ensure that the Flutter engine's bindings are properly set up before your application starts to run tasks, like initializing services or plugins
-  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final SharedPreferences prefs = await SharedPreferences.getInstance();
  // final entrypoint = prefs.getBool('entrypoint')??false;  // this is useful when use onBoarding Screen
   final loggedIn = prefs.getBool('loggedIn')??false;
