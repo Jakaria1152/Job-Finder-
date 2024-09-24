@@ -10,10 +10,9 @@ class AuthHelper{
 
 static Future<bool> login(LoginModel model)async{
   http.Response? response;
-  print('>>> Attempt to log in');
 
-  print(model.email);
-  print(model.password);
+
+
   Map<String, String> requestHeaders = {
     "Content-Type": "application/json"
   };
@@ -32,11 +31,12 @@ try{
 
   if(response!.statusCode == 200)
     {
-      print('login success ${response.statusCode}');
+
       final SharedPreferences pref = await SharedPreferences.getInstance();
 print('res body is: ${response.body}');
 
 //jsonDecode na korle aitar map value gulo access kora jai na
+      //Converts the JSON string into a Dart map
 var responseBody = jsonDecode(response.body);
 
       String token =responseBody['token'];
@@ -52,7 +52,7 @@ var responseBody = jsonDecode(response.body);
       return true;
     }
   else{
-    print('login failed ${response.statusCode}');
+
     return false;
   }
 
