@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/controllers/image_provider.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
 import 'package:job_finder_app/views/common/custom_button.dart';
@@ -36,6 +39,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
   }
   @override
   Widget build(BuildContext context) {
+    final imageUploader = Provider.of<ImageUploader>(context,listen: true);
     return Scaffold(
      
       body: Consumer<LoginNotifier>(  // LoginNotifier which is provider file(must same this name)
@@ -48,13 +52,32 @@ class _PersonalDetailsState extends State<PersonalDetails> {
               children: [
 ReusableText(text: 'Personal Details', style: TextStyle(fontSize: 35,
 color: Colors.black, fontWeight: FontWeight.bold)),
-                
-                GestureDetector(
-                  onTap: null,
+
+                // image upload na thakle empty hobe tai image pick korbe
+                imageUploader.imageFil.isEmpty? GestureDetector(
+                  onTap: (){
+                    // image gallery open hobe
+                   imageUploader.pickImage();
+                  },
                   child: CircleAvatar(
                     backgroundColor: Colors.lightBlue,
                     //backgroundImage: ,
                     child: Icon(Icons.photo_filter_rounded),
+                  ),
+                ):
+                GestureDetector(
+                  onTap: (){
+                    // image list ta clear hoye jasse
+                    imageUploader.imageFil.clear();
+                    setState(() {
+
+                    });
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: Colors.lightBlue,
+                    // selected image ta show korbe
+                    backgroundImage: FileImage(File(imageUploader.imageFil[0])),
+                    
                   ),
                 ),
               ],

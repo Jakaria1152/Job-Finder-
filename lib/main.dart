@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_finder_app/controllers/image_provider.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
 import 'package:job_finder_app/controllers/sign_up_notifier.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
@@ -34,7 +35,8 @@ void main()async{
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (context) => LoginNotifier(),),
       ChangeNotifierProvider(create: (context) => SignUpNotifier(),),
-      ChangeNotifierProvider(create: (context) => ZoomNotifier(),)
+      ChangeNotifierProvider(create: (context) => ZoomNotifier(),),
+      ChangeNotifierProvider(create: (context) => ImageUploader(),)
     ],child: myApp(),)
   );
 }

@@ -15,7 +15,7 @@ class ImageUploader extends ChangeNotifier{
     XFile? _imageFile = await _picker.pickImage(source: ImageSource.gallery);
 
     _imageFile = await cropImage(_imageFile!);
-    CroppedFile? croppedFile = await ImageCropper().cropImage(sourcePath: _imageFile!.path);
+
 
     if(_imageFile != null)
       {
@@ -60,4 +60,6 @@ else{
   return null;
 }
   }
+
+
 }
