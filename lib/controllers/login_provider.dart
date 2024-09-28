@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/request/LoginModel.dart';
 
 class LoginNotifier extends ChangeNotifier{
+  final profileFormKey = GlobalKey<FormState>();
 
   // first time signup/registration korle update profile page a niye jabe and firsttime = false kore dibe jokhon signup button a click kora hobe
   bool _firstTime = true;
@@ -44,6 +45,19 @@ class LoginNotifier extends ChangeNotifier{
     //entrypoint = prefs.getBool('entrypoint')??false;
   }
   final loginFormKey = GlobalKey<FormState>();
+
+  bool profileValidation(){
+    final form = profileFormKey.currentState;
+    if(form != null && form.validate())
+      {
+        form.save();
+        return true;
+      }
+    else
+      {
+        return false;
+      }
+  }
 
   bool validateAndSave()
   {
