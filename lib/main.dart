@@ -49,7 +49,7 @@ class myApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Job finder app',
-      home: PersonalDetails(),
+      home: defaultHome,
       //home: defaultHome,  // condition er upor base kore login or main page show korbe
     );
   }

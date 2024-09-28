@@ -23,7 +23,7 @@ class ImageUploader extends ChangeNotifier {
     if (_imageFile != null) {
       imageFil.add(_imageFile.path);
       // ai function upload function ke call korbe image store korar jonno
-      imageUpload(_imageFile);
+     imageUpload(_imageFile);
       imagePath = _imageFile.path;
     } else {
       return;

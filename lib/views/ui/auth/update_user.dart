@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:job_finder_app/controllers/image_provider.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
+import 'package:job_finder_app/model/request/profile_update_model.dart';
 import 'package:job_finder_app/views/common/custom_button.dart';
 import 'package:job_finder_app/views/common/custom_text_field.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
@@ -176,7 +177,13 @@ class _PersonalDetailsState extends State<PersonalDetails> {
               ),
               SizedBox(height: 20,),
               CustomButton(onTap: (){
-
+                ProfileUpdateModel model = ProfileUpdateModel(
+                    location: location.text,
+                    phone: phone.text,
+                    profile: imageUploader.imageUrl??"",
+                    skills: [skill0.text,skill1.text,skill2.text,skill3.text,skill4.text]
+                );
+loginNotifier.updateProfile(model);
               },text: 'Update Profile')
             ],
           ))

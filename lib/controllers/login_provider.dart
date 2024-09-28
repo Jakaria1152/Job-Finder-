@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_finder_app/model/request/profile_update_model.dart';
 import 'package:job_finder_app/services/authHelper/auth_helper.dart';
 import 'package:job_finder_app/views/ui/auth/update_user.dart';
 import 'package:job_finder_app/views/ui/mainScreen.dart';
@@ -88,13 +89,40 @@ print('form is ${form}');
               Get.off(const MainScreen());
             }
           else if(!response){
-            Get.snackbar("Sign Failed", "Please check your credentials",
+            Get.snackbar("SignIn Failed", "Please check your credentials",
             colorText: Colors.white,
               backgroundColor: Colors.red,
               icon: Icon(Icons.add_alert)
             );
           }
         });
+  }
+
+  //user profile update
+  updateProfile(ProfileUpdateModel model)async
+  {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('userId');
+    print('userId is: $userId');
+    AuthHelper.updateProfile(model,userId??"").then((response){
+      // user resgistration korle first time take update profile page niye jawa hobe
+      if(response)
+      {
+        Get.snackbar("profile update", "Enjoy your search",
+        colorText: Colors.white,
+          backgroundColor: Colors.blue,
+          icon: const Icon(Icons.add_alert)
+        );
+        Get.off(const MainScreen());
+      }
+      else {
+        Get.snackbar("Update Failed", "Please check your credentials",
+            colorText: Colors.white,
+            backgroundColor: Colors.red,
+            icon: Icon(Icons.add_alert)
+        );
+      }
+    });
   }
 
   // logout hole cache memory theke token remove hoye jabe

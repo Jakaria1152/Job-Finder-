@@ -17,7 +17,7 @@ class ProfileUpdateModel{
         location: json['location'],
         phone: json['phone'],
         profile: json['profile'],
-        skills: List<String>.from(json['skills'].map(())) // update this part
+        skills: List<String>.from(json['skills']??[])
     );
   }
   Map<String,dynamic> toMap()=>{
