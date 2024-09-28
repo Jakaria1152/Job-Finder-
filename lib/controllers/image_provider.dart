@@ -60,6 +60,7 @@ class ImageUploader extends ChangeNotifier {
   Future<String?> imageUpload(XFile upload) async {
     File image = File(upload.path);
 
+    // jobhun nam e folder create hobe then tar vitore image store hobe
     final ref = FirebaseStorage.instance
         .ref()
         .child('jobhub')
