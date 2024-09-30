@@ -7,7 +7,7 @@ import 'package:job_finder_app/views/common/custom_button.dart';
 import 'package:job_finder_app/views/common/custom_text_field.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/mainScreen.dart';
-import 'package:job_finder_app/views/ui/auth/registration_page.dart';
+import 'package:job_finder_app/views/ui/auth/signUp_page.dart';
 import 'package:provider/provider.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -95,7 +95,8 @@ class _LoginPageState extends State<LoginPage> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
-                    onTap: ()=>Get.to(const RegistrationPage()),
+                    // Get.offAll use koresi jeno login page ba signup age theke back korle onno page a na jai karon login, signup page e jawar jonno already button deya ase
+                    onTap: ()=>Get.offAll(const signUpPage()),
                     child: ReusableText(text: "Register",style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,

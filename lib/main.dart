@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/controllers/image_provider.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
-import 'package:job_finder_app/controllers/sign_up_notifier.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
 import 'package:job_finder_app/views/ui/auth/login_page.dart';
 import 'package:job_finder_app/views/ui/auth/update_user.dart';
@@ -11,6 +10,7 @@ import 'package:job_finder_app/views/ui/mainScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'controllers/signup_provider.dart';
 import 'firebase_options.dart';
 
 

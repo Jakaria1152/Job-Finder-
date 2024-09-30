@@ -7,7 +7,7 @@ import 'package:job_finder_app/model/request/signUpModel.dart';
 import 'package:job_finder_app/services/authHelper/auth_helper.dart';
 import 'package:job_finder_app/views/ui/auth/login_page.dart';
 
-class SignUpProvider extends ChangeNotifier{
+class SignUpNotifier extends ChangeNotifier{
   bool _obsecureText = true;
 
   bool get obsecureText => _obsecureText;
@@ -45,9 +45,12 @@ signUp(SignUpModel model)async{
 AuthHelper.signUp(model).then((response){
   if(response)
     {
-      Get.off(const LoginPage());
-  //     transition: Transition.fade,
-  // duration: const Duration(seconds: 2),
+      // this is important and useful see carefully
+      Get.off(()=>const LoginPage(),
+      transition: Transition.fade,
+        duration:const Duration(seconds: 2)
+      );
+
     }else
       {
         Get.snackbar(

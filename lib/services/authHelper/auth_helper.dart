@@ -77,26 +77,8 @@ var responseBody = jsonDecode(response.body);
       print('login api call error: $e');
     }
 
-    if(response!.statusCode == 200)
+    if(response!.statusCode == 201)
     {
-
-      final SharedPreferences pref = await SharedPreferences.getInstance();
-// print('res body is: ${response.body}');
-
-//jsonDecode na korle aitar map value gulo access kora jai na
-      //Converts the JSON string into a Dart map
-      var responseBody = jsonDecode(response.body);
-
-      String token =responseBody['token'];
-      String userId = responseBody['others']['_id'];
-      String profile = responseBody['others']['profile'];
-
-      await pref.setString('token', token);
-      await pref.setString('userId', userId);
-      await pref.setString('profile', profile);
-      await pref.setBool('loggedIn', true);  // bar bar login screen show korbena aitar karone
-
-
       return true;
     }
     else{
