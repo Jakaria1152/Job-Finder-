@@ -34,7 +34,7 @@ try{
     {
 
       final SharedPreferences pref = await SharedPreferences.getInstance();
-print('res body is: ${response.body}');
+// print('res body is: ${response.body}');
 
 //jsonDecode na korle aitar map value gulo access kora jai na
       //Converts the JSON string into a Dart map
@@ -68,10 +68,10 @@ static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
 
   Map<String, String> requestHeaders = {
     "Content-Type": "application/json",
-    "token": '$token'
+    "x-auth-token": '$token'  // this is x-auth-token same as backend req.header("x-auth-token");
   };
   try{
-    response = await http.post(Uri.parse('${Config.apiUrl}${Config.profileUrl}/$userId'),
+    response = await http.put(Uri.parse('${Config.apiUrl}${Config.profileUrl}/$userId'),
         body: jsonEncode({
           // backend a send korte gele middlewar er jonno jsonEncode korte hoi
           "location": model.location,
@@ -87,9 +87,11 @@ static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
 
   if(response!.statusCode == 200)
   {
+    print('response coed is: ${response.statusCode}');
     return true;
   }
   else{
+    print('response coed is: ${response.statusCode}');
     return false;
   }
 
