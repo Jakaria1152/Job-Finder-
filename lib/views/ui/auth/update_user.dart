@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:job_finder_app/controllers/image_provider.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
@@ -176,15 +178,32 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                 },
               ),
               SizedBox(height: 20,),
-              CustomButton(onTap: (){
-                ProfileUpdateModel model = ProfileUpdateModel(
-                    location: location.text,
-                    phone: phone.text,
-                    profile: imageUploader.imageUrl??"",
-                    skills: [skill0.text,skill1.text,skill2.text,skill3.text,skill4.text]
-                );
-loginNotifier.updateProfile(model);
-              },text: 'Update Profile')
+              Consumer<ImageUploader>(builder: (context, imageUploader, child) {
+                return CustomButton(onTap: (){
+if(imageUploader.imageFil.isEmpty && imageUploader.imageUrl == null)
+  {
+    Get.snackbar("Image Missing", "Please upload an image to proceed",
+        colorText: Colors.white,
+        backgroundColor: Colors.orange,
+        icon: Icon(Icons.add_alert)
+    );
+  }else
+    {
+      ProfileUpdateModel model = ProfileUpdateModel(
+          location: location.text,
+          phone: phone.text,
+          profile: imageUploader.imageUrl??"",
+          skills: [skill0.text,skill1.text,skill2.text,skill3.text,skill4.text]
+      );
+
+      // call update profile function
+      loginNotifier.updateProfile(model);
+    }
+
+
+
+                },text: 'Update Profile');
+              },)
             ],
           ))
             ],

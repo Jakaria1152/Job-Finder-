@@ -101,10 +101,10 @@ print('form is ${form}');
   //user profile update
   updateProfile(ProfileUpdateModel model)async
   {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString('userId');
-    print('userId is: $userId');
-    AuthHelper.updateProfile(model,userId??"").then((response){
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? userId = prefs.getString('userId');
+    // print('userId is: $userId');
+    AuthHelper.updateProfile(model).then((response){
       // user resgistration korle first time take update profile page niye jawa hobe
       if(response)
       {
@@ -113,12 +113,16 @@ print('form is ${form}');
           backgroundColor: Colors.blue,
           icon: const Icon(Icons.add_alert)
         );
-        Get.off(const MainScreen());
+        // 3 second delay kore mainscreen a niye jabe
+        Future.delayed(Duration(seconds: 3)).then((value){
+          // Get.offAll deya hoese jeno r back na hoi
+          Get.offAll(const MainScreen());
+        });
       }
       else {
-        Get.snackbar("Update Failed", "Please check your credentials",
+        Get.snackbar("Updating Failed", "Please try again",
             colorText: Colors.white,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.orange,
             icon: Icon(Icons.add_alert)
         );
       }
