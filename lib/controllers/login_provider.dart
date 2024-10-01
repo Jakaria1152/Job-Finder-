@@ -81,6 +81,8 @@ print('form is ${form}');
           // user resgistration korle first time take update profile page niye jawa hobe
           if(response && firstTime)
           {
+            // first time profile update korle aita false hoye jabe r kokhono login er somoi information caibe na
+            firstTime = false;
             Get.off(const PersonalDetails());
           }
           // first time na hole mainscreen a cole jabe
@@ -101,10 +103,10 @@ print('form is ${form}');
   //user profile update
   updateProfile(ProfileUpdateModel model)async
   {
-    // final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // String? userId = prefs.getString('userId');
-    // print('userId is: $userId');
-    AuthHelper.updateProfile(model).then((response){
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('userId');
+    print('userId is: $userId');
+    AuthHelper.updateProfile(model,userId??"").then((response){
       // user resgistration korle first time take update profile page niye jawa hobe
       if(response)
       {

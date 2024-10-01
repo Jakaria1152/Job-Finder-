@@ -88,7 +88,7 @@ var responseBody = jsonDecode(response.body);
 
   }
 
-static Future<bool> updateProfile(ProfileUpdateModel model)async{
+static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
   final SharedPreferences pref = await SharedPreferences.getInstance();
   String? token = pref.getString("token");
   http.Response? response;
@@ -100,7 +100,7 @@ static Future<bool> updateProfile(ProfileUpdateModel model)async{
     "x-auth-token": '$token'  // this is x-auth-token same as backend req.header("x-auth-token");
   };
   try{
-    response = await http.put(Uri.parse('${Config.apiUrl}${Config.profileUrl}'),
+    response = await http.put(Uri.parse('${Config.apiUrl}${Config.profileUrl}/$userId'),
         body: jsonEncode({
           // backend a send korte gele middlewar er jonno jsonEncode korte hoi
           "location": model.location,
@@ -120,7 +120,7 @@ static Future<bool> updateProfile(ProfileUpdateModel model)async{
     return true;
   }
   else{
-    print('response coed is: ${response.statusCode}');
+    print('response code is: ${response.statusCode}');
     return false;
   }
 
