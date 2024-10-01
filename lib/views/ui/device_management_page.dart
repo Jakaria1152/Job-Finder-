@@ -7,6 +7,7 @@ import 'package:job_finder_app/views/ui/homePage.dart';
 import 'package:job_finder_app/views/ui/auth/login_page.dart';
 import 'package:job_finder_app/views/ui/widget/devicesInfo.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/app_bar.dart';
 import '../common/drawer/drawerWidget.dart';
@@ -69,9 +70,12 @@ class DeviceManagementPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: GestureDetector(
-                onTap: (){
+                onTap: ()async{
                   zoomNotifier.currentIndex = 0;
-                  Get.to(LoginPage());
+                  // akbar sign out korle back button click kore jeno r main screen a jete na pare
+                  Get.offAll(const LoginPage());
+                  final SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.setBool('loggedIn', false);
                 },
                 child: Align(
                   alignment: Alignment.bottomCenter,
