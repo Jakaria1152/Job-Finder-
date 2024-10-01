@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:job_finder_app/model/request/LoginModel.dart';
 import 'package:job_finder_app/model/request/profile_update_model.dart';
 import 'package:job_finder_app/model/request/signUpModel.dart';
+import 'package:job_finder_app/model/response/auth/profile_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config.dart';
@@ -13,9 +14,6 @@ class AuthHelper{
   // login function
 static Future<bool> login(LoginModel model)async{
   http.Response? response;
-
-
-
   Map<String, String> requestHeaders = {
     "Content-Type": "application/json"
   };
@@ -87,7 +85,7 @@ var responseBody = jsonDecode(response.body);
     }
 
   }
-
+// update profile (personalInformation user)
 static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
   final SharedPreferences pref = await SharedPreferences.getInstance();
   String? token = pref.getString("token");
@@ -125,4 +123,33 @@ static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
   }
 
 }
+
+// Get Profile
+  static Future<ProfileResponse> getProfile()async{
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    String? token = pref.getString("token");
+    http.Response? response;
+    Map<String, String> requestHeaders = {
+      "Content-Type": "application/json",
+      "x-auth-token": '$token'  // this is x-auth-token same as backend req.header("x-auth-token");
+    };
+    try{
+      response = await http.get(Uri.parse('${Config.apiUrl}${Config.profileUrl}'),
+               headers: requestHeaders);
+    }catch(e)
+    {
+      print('update profile api call error: $e');
+    }
+
+    if(response!.statusCode == 200)
+    {
+     var profile = profileResponseFromJson(response.body);
+      return profile;
+    }
+    else{
+      throw Exception('Failed to get profile');
+    }
+
+  }
+
 }

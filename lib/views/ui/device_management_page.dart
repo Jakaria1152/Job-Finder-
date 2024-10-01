@@ -74,8 +74,8 @@ class DeviceManagementPage extends StatelessWidget {
                   zoomNotifier.currentIndex = 0;
                   // akbar sign out korle back button click kore jeno r main screen a jete na pare
                   Get.offAll(const LoginPage());
-                  final SharedPreferences prefs = await SharedPreferences.getInstance();
-                  prefs.setBool('loggedIn', false);
+                  // log out function ke call korsi
+                  LoginNotifier().logout();
                 },
                 child: Align(
                   alignment: Alignment.bottomCenter,

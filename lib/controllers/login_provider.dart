@@ -81,8 +81,7 @@ print('form is ${form}');
           // user resgistration korle first time take update profile page niye jawa hobe
           if(response && firstTime)
           {
-            // first time profile update korle aita false hoye jabe r kokhono login er somoi information caibe na
-            firstTime = false;
+
             Get.off(const PersonalDetails());
           }
           // first time na hole mainscreen a cole jabe
@@ -135,6 +134,8 @@ print('form is ${form}');
   logout()async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
+    await prefs.remove("userId");
+    await prefs.remove("profile");
     await prefs.setBool('loggedIn', false);
 
     // akbar logout korar por jokhon abar login korbe tokhon jeno update profile a niye na jai ai jonno first time false kora hosse

@@ -165,7 +165,7 @@ class _signUpPageState extends State<signUpPage> {
                             username: name.text);
 
                         // user registration complete korle first time false kore deya hobe jeno next time login korte gele profile update page show na kore
-                       // loginNotifier.firstTime = !loginNotifier.firstTime;
+                        loginNotifier.firstTime = !loginNotifier.firstTime;
 
                         signUpNotifier.signUp(model);
                         // i comment out form validate because current version flutter does not support it
