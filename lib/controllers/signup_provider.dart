@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_common/get_reset.dart';
+import 'dart:async';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:job_finder_app/model/request/signUpModel.dart';
 import 'package:job_finder_app/services/authHelper/auth_helper.dart';
@@ -31,11 +31,15 @@ bool passwordValidator(String password){
   final registerFormKey = GlobalKey<FormState>();
   bool validateFormAndSave() {
     final form = registerFormKey.currentState;
-
+print('registration validator called');
+print(form);
+print(form!.validate());
     if (form!.validate()) {
       form.save();
+      print('form valid');
       return true;
     } else {
+      print('form invalid');
       return false;
     }
   }
@@ -45,6 +49,7 @@ signUp(SignUpModel model)async{
 AuthHelper.signUp(model).then((response){
   if(response)
     {
+
       // this is important and useful see carefully
       Get.off(()=>const LoginPage(),
       transition: Transition.fade,
@@ -53,6 +58,7 @@ AuthHelper.signUp(model).then((response){
 
     }else
       {
+
         Get.snackbar(
           "Sign up Failed",
           "Please Check your credentials and try again",

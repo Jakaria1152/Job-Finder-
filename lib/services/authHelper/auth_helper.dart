@@ -70,13 +70,13 @@ var responseBody = jsonDecode(response.body);
     try{
       response = await http.post(Uri.parse('${Config.apiUrl}${Config.signUpUrl}'),
          // body:  model.toJson() //// model er json ke call korsi aita automatically jsonEncode kore dibe json file ke
-          body: jsonEncode(model),
+          body: model.toJson(),
           headers: requestHeaders);
     }catch(e)
     {
       print('login api call error: $e');
     }
-
+// print(response?.statusCode);
     if(response!.statusCode == 201)
     {
       return true;

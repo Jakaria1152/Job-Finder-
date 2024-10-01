@@ -41,6 +41,7 @@ class CustomTextField extends StatelessWidget {
         ),
         controller: controller,
         cursorHeight: 25,
+
         style: TextStyle(fontSize: 14,color: Colors.black, fontWeight: FontWeight.w500),
         validator: validator,
       ),

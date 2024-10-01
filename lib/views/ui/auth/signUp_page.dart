@@ -4,7 +4,6 @@ import 'package:job_finder_app/controllers/login_provider.dart';
 import 'package:job_finder_app/model/request/signUpModel.dart';
 import 'package:job_finder_app/views/ui/auth/login_page.dart';
 import 'package:provider/provider.dart';
-
 import '../../../controllers/signup_provider.dart';
 import '../../common/app_bar.dart';
 import '../../common/custom_button.dart';
@@ -70,9 +69,7 @@ class _signUpPageState extends State<signUpPage> {
                           {
                         return "Please enter your name";
                       }
-                      else{
-                        return null!;
-                      }
+                      return null!;
                     },
                   ),
                   SizedBox(height: 20,),
@@ -94,9 +91,9 @@ class _signUpPageState extends State<signUpPage> {
                     hintText: "Password",
                     keyboardType: TextInputType.text,
                     validator: (password){
-                      if(password!.isEmpty || password.length<8)  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
+                      if(password!.isEmpty || password.length<7)  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
                           {
-                        return "Please enter at least 7 digit password";
+                        return "Please enter at least 6 digit password";
                       }
                       else{
                         return null!;
@@ -129,24 +126,31 @@ class _signUpPageState extends State<signUpPage> {
                       onTap: (){
                     // user registration complete korle first time false kore deya hobe jeno next time login korte gele profile update page show na kore
               loginNotifier.firstTime = !loginNotifier.firstTime;
-              if(signUpNotifier.validateFormAndSave())
-                {
-SignUpModel model = SignUpModel(
-    email: email.text,
-    password: password.text,
-    username: name.text);
+                    SignUpModel model = SignUpModel(
+        email: email.text,
+        password: password.text,
+        username: name.text);
 
-signUpNotifier.signUp(model);
-                }else{
-                Get.snackbar(
-                  "Sign up Failed",
-                  "Please Check your credentials and try again",
-                  colorText: Colors.white,
-                  backgroundColor: Colors.red,
-                  icon: const Icon(Icons.add_alert),
-                );
+        signUpNotifier.signUp(model);
+        // i comment out form validate because current version flutter does not support it
+//               if(signUpNotifier.validateFormAndSave())
+//                 {
+// SignUpModel model = SignUpModel(
+//     email: email.text,
+//     password: password.text,
+//     username: name.text);
+//
+// signUpNotifier.signUp(model);
+//                 }else{
+//                 Get.snackbar(
+//                   "Sign up Failed",
+//                   "Please Check your credentials and try again",
+//                   colorText: Colors.white,
+//                   backgroundColor: Colors.red,
+//                   icon: const Icon(Icons.add_alert),
+//                 );
               }
-                      }
+
                   )
 
                 ],
