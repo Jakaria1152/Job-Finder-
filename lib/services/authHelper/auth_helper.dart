@@ -128,13 +128,15 @@ static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
   static Future<ProfileResponse> getProfile()async{
     final SharedPreferences pref = await SharedPreferences.getInstance();
     String? token = pref.getString("token");
+    String? userId = pref.getString('userId');
+
     http.Response? response;
     Map<String, String> requestHeaders = {
       "Content-Type": "application/json",
       "x-auth-token": '$token'  // this is x-auth-token same as backend req.header("x-auth-token");
     };
     try{
-      response = await http.get(Uri.parse('${Config.apiUrl}${Config.profileUrl}'),
+      response = await http.get(Uri.parse('${Config.apiUrl}${Config.profileUrl}/$userId'),
                headers: requestHeaders);
     }catch(e)
     {
@@ -143,7 +145,17 @@ static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
 
     if(response!.statusCode == 200)
     {
-     var profile = profileResponseFromJson(response.body);
+     //  var data = jsonDecode(response.body);
+     // print(data);
+
+      var profile;
+    try{
+      profile = profileResponseFromJson(response.body);
+    }catch(e)
+    {
+      print('error is $e');
+    }
+
       return profile;
     }
     else{

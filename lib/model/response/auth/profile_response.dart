@@ -8,35 +8,35 @@ class ProfileResponse {
   final String id;
   final String username;
   final String email;
-  final bool isAdmin;
-  final bool isAgent;
+  final bool? isAdmin; // Changed to nullable
+  final bool? isAgent; // Changed to nullable
   final List<String> skills;
   final String profile;
   final String location;
-  final String phone;
+  final String? phone; // Changed to nullable
 
   ProfileResponse({
     required this.id,
     required this.username,
     required this.email,
-    required this.isAdmin,
-    required this.isAgent,
+    this.isAdmin, // Changed
+    this.isAgent, // Changed
     required this.skills,
     required this.profile,
     required this.location,
-    required this.phone,
+    this.phone, // Changed
   });
 
   factory ProfileResponse.fromJson(Map<String, dynamic> json) => ProfileResponse(
     id: json["_id"],
     username: json["username"],
     email: json["email"],
-    isAdmin: json["isAdmin"],
-    isAgent: json["isAgent"],
+    isAdmin: json["isAdmin"] ?? false, // Default to false if not present
+    isAgent: json["isAgent"] ?? false, // Default to false if not present
     skills: List<String>.from(json["skills"].map((x) => x)),
     profile: json["profile"],
     location: json["location"],
-    phone: json["phone"],
+    phone: json["phone"], // Will be null if not present
   );
 
   Map<String, dynamic> toJson() => {
@@ -50,5 +50,4 @@ class ProfileResponse {
     "location": location,
     "phone": phone,
   };
-
 }

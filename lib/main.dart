@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/controllers/image_provider.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
+import 'package:job_finder_app/controllers/profile_provider.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
 import 'package:job_finder_app/views/ui/auth/login_page.dart';
 import 'package:job_finder_app/views/ui/auth/update_user.dart';
@@ -36,7 +37,8 @@ void main()async{
       ChangeNotifierProvider(create: (context) => LoginNotifier(),),
       ChangeNotifierProvider(create: (context) => SignUpNotifier(),),
       ChangeNotifierProvider(create: (context) => ZoomNotifier(),),
-      ChangeNotifierProvider(create: (context) => ImageUploader(),)
+      ChangeNotifierProvider(create: (context) => ImageUploader(),),
+      ChangeNotifierProvider(create: (context) => ProfileNotifier(),),
     ],child: myApp(),)
   );
 }

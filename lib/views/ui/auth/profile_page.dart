@@ -194,9 +194,9 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           SvgPicture.asset("assets/icon/Flag_of_Bangladesh.svg",height: 20,width: 20,),
                           SizedBox(width: 15,),
-                          ReusableText(text: userData.phone,style: TextStyle(
-                              fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600
-                          ),),
+                          // ReusableText(text: userData.phone,style: TextStyle(
+                          //     fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600
+                          // ),),
                         ],
                       ),
                     ),
