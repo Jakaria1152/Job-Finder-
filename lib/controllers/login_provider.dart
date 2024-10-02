@@ -45,7 +45,7 @@ class LoginNotifier extends ChangeNotifier{
     loggedIn = prefs.getBool('loggedIn')??false;
     //entrypoint = prefs.getBool('entrypoint')??false;
   }
-  final loginFormKey = GlobalKey<FormState>();
+
 
   bool profileValidation(){
     final form = profileFormKey.currentState;
@@ -59,7 +59,7 @@ class LoginNotifier extends ChangeNotifier{
         return false;
       }
   }
-
+  final loginFormKey = GlobalKey<FormState>();
   bool validateAndSave()
   {
     print('loginFormKey is ${loginFormKey}');

@@ -20,6 +20,7 @@ class PersonalDetails extends StatefulWidget {
 }
 
 class _PersonalDetailsState extends State<PersonalDetails> {
+
   TextEditingController phone = TextEditingController();
   TextEditingController location = TextEditingController();
   TextEditingController skill0 = TextEditingController();
@@ -48,7 +49,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
       body: Consumer<LoginNotifier>(  // LoginNotifier which is provider file(must same this name)
         builder: (context, loginNotifier, child) {  // loginNotifier use any name here
         return Form(
-          key: loginNotifier.profileFormKey,
+          key: loginNotifier.loginFormKey,
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 20,vertical: 60),
             children: [
@@ -97,9 +98,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           {
             return "Please Enter valid location";
           }
-                else{
-          return null!;
-                }
+                return null;
               },
               ),
               SizedBox(height: 10,),
@@ -109,9 +108,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           {
             return "Please Enter valid phone";
           }
-                else{
-          return null!;
-                }
+                return null;
               },
               ),
               SizedBox(height: 10,),
@@ -124,9 +121,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           {
             return "Please Enter valid professional skill";
           }
-          else{
-            return null!;
-          }
+         return null;
                 },
               ),
               SizedBox(height: 10,),
@@ -136,9 +131,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           {
             return "Please Enter valid professional skill";
           }
-          else{
-            return null!;
-          }
+          return null;
                 },
               ),
               SizedBox(height: 10,),
@@ -148,9 +141,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           {
             return "Please Enter valid professional skill";
           }
-          else{
-            return null!;
-          }
+          return null;
                 },
               ),
               SizedBox(height: 10,),
@@ -160,9 +151,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           {
             return "Please Enter valid professional skill";
           }
-          else{
-            return null!;
-          }
+          return null;
                 },
               ),
               SizedBox(height: 10,),
@@ -172,9 +161,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
           {
             return "Please Enter valid professional skill";
           }
-          else{
-            return null!;
-          }
+          return null;
                 },
               ),
               SizedBox(height: 20,),
@@ -189,20 +176,20 @@ if(imageUploader.imageFil.isEmpty && imageUploader.imageUrl == null)
     );
   }else
     {
-      ProfileUpdateModel model = ProfileUpdateModel(
-          location: location.text,
-          phone: phone.text,
-          profile: imageUploader.imageUrl??"",
-          skills: [skill0.text,skill1.text,skill2.text,skill3.text,skill4.text]
-      );
+      if(loginNotifier.validateAndSave())
+        {
+          ProfileUpdateModel model = ProfileUpdateModel(
+              location: location.text,
+              phone: phone.text,
+              profile: imageUploader.imageUrl??"",
+              skills: [skill0.text,skill1.text,skill2.text,skill3.text,skill4.text]
+          );
 
-      // call update profile function
-      loginNotifier.updateProfile(model);
+          // call update profile function
+          loginNotifier.updateProfile(model);
+        }
     }
-
-
-
-                },text: 'Update Profile');
+       },text: 'Update Profile');
               },)
             ],
           ))
