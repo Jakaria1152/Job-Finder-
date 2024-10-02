@@ -46,93 +46,96 @@ class _LoginPageState extends State<LoginPage> {
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                const SizedBox(height: 50,),
-                ReusableText(text: 'Welcome Back!', style: const TextStyle(fontSize: 30,fontWeight: FontWeight.w600, color: Colors.black)),
-                ReusableText(text: 'Fill the details to login to your account', style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600
-                )),
-                const SizedBox(height: 50,),
-                CustomTextField(controller: email,
-                  hintText: "Email",
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (email){
-                    if(email!.isEmpty || !email.contains("@") )  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
-                        {
-                      return "Please enter a valid email";
-                    }
-                    else{
-                      return null!;
-                    }
-                  },
-                ),
-                const SizedBox(height: 20,),
-                CustomTextField(controller: password,
-                  hintText: "Password",
-                  keyboardType: TextInputType.text,
-                  validator: (password){
-                    if(password!.isEmpty || password.length<7)  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
-                        {
-                      return "Please enter at least 6 digit password";
-                    }
-                    else{
-                      return null!;
-                    }
-                  },
-                  obscureText: loginNotifier.obsecureText,
-                  suffixIcon: GestureDetector(
-                    onTap: (){
-                      loginNotifier.obsecureText = !loginNotifier.obsecureText;
+            child: Form(
+              key: loginNotifier.loginFormKey,
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  const SizedBox(height: 50,),
+                  ReusableText(text: 'Welcome Back!', style: const TextStyle(fontSize: 30,fontWeight: FontWeight.w600, color: Colors.black)),
+                  ReusableText(text: 'Fill the details to login to your account', style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600
+                  )),
+                  const SizedBox(height: 50,),
+                  CustomTextField(controller: email,
+                    hintText: "Email",
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (email){
+                      if(email!.isEmpty || !email.contains("@") )  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
+                          {
+                        return "Please enter a valid email";
+                      }
+                      else{
+                        return null;
+                      }
                     },
-                    child:loginNotifier.obsecureText ? const Icon(Icons.visibility_off,color: Colors.black,) : const Icon(Icons.visibility,color: Colors.black,),
                   ),
-                ),
-                const SizedBox(height: 10,),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    // Get.offAll use koresi jeno login page ba signup age theke back korle onno page a na jai karon login, signup page e jawar jonno already button deya ase
-                    onTap: ()=>Get.offAll(const signUpPage()),
-                    child: ReusableText(text: "Register",style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500
-                    ),),
+                  const SizedBox(height: 20,),
+                  CustomTextField(controller: password,
+                    hintText: "Password",
+                    keyboardType: TextInputType.text,
+                    validator: (password){
+                      if(password!.isEmpty || password.length<7)  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
+                          {
+                        return "Please enter at least 6 digit password";
+                      }
+                      else{
+                        return null;
+                      }
+                    },
+                    obscureText: loginNotifier.obsecureText,
+                    suffixIcon: GestureDetector(
+                      onTap: (){
+                        loginNotifier.obsecureText = !loginNotifier.obsecureText;
+                      },
+                      child:loginNotifier.obsecureText ? const Icon(Icons.visibility_off,color: Colors.black,) : const Icon(Icons.visibility,color: Colors.black,),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 50,),
-                CustomButton(text: 'Login',
-                    onTap: (){
+                  const SizedBox(height: 10,),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      // Get.offAll use koresi jeno login page ba signup age theke back korle onno page a na jai karon login, signup page e jawar jonno already button deya ase
+                      onTap: ()=>Get.offAll(const signUpPage()),
+                      child: ReusableText(text: "Register",style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500
+                      ),),
+                    ),
+                  ),
+                  const SizedBox(height: 50,),
+                  CustomButton(text: 'Login',
+                      onTap: (){
 
-                        LoginModel model = LoginModel(
-                            email: email.text,
-                            password: password.text);
+                          LoginModel model = LoginModel(
+                              email: email.text,
+                              password: password.text);
 
-                        loginNotifier.userLogin(model);
+                          loginNotifier.userLogin(model);
 
-                  // i get form (null) error so i comment out this code
-                  //     if(loginNotifier.validateAndSave())
-                  //     {
-                  //       LoginModel model = LoginModel(
-                  //           email: email.text,
-                  //           password: password.text);
-                  //       loginNotifier.userLogin(model);
-                  //     }else{
-                  //       Get.snackbar("Sign Failed", "Please check your credentials",
-                  //           colorText: Colors.white,
-                  //           backgroundColor: Colors.red,
-                  //           icon: Icon(Icons.add_alert)
-                  //       );
-                  //     }
-//Get.to(MainScreen());
-                    }
-                )
+                    // i get form (null) error so i comment out this code
+                        if(loginNotifier.validateAndSave())
+                        {
+                          LoginModel model = LoginModel(
+                              email: email.text,
+                              password: password.text);
+                          loginNotifier.userLogin(model);
+                        }else{
+                          Get.snackbar("Sign Failed", "Please check your credentials",
+                              colorText: Colors.white,
+                              backgroundColor: Colors.red,
+                              icon: Icon(Icons.add_alert)
+                          );
+                        }
+              // Get.to(MainScreen());
+                      }
+                  )
 
-              ],
+                ],
+              ),
             ),
           ),
         );

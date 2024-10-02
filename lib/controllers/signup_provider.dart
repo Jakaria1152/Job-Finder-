@@ -31,15 +31,13 @@ bool passwordValidator(String password){
   final registerFormKey = GlobalKey<FormState>();
   bool validateFormAndSave() {
     final form = registerFormKey.currentState;
-print('registration validator called');
-print(form);
-print(form!.validate());
+
     if (form!.validate()) {
       form.save();
-      print('form valid');
+
       return true;
     } else {
-      print('form invalid');
+
       return false;
     }
   }

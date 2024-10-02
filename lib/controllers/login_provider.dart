@@ -62,9 +62,9 @@ class LoginNotifier extends ChangeNotifier{
   final loginFormKey = GlobalKey<FormState>();
   bool validateAndSave()
   {
-    print('loginFormKey is ${loginFormKey}');
+
     final form = loginFormKey.currentState;
-print('form is ${form}');
+
     if(form != null && form.validate())
       {
         form.save();

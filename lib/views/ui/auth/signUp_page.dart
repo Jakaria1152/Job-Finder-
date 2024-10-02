@@ -81,7 +81,7 @@ class _signUpPageState extends State<signUpPage> {
                       {
                         return "Please enter your name";
                       }
-                      return null!;
+                      return null;
                     },
                   ),
                   SizedBox(
@@ -97,9 +97,8 @@ class _signUpPageState extends State<signUpPage> {
                               "@")) // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
                       {
                         return "Please enter a valid email";
-                      } else {
-                        return null!;
                       }
+                      return null;
                     },
                   ),
                   SizedBox(
@@ -115,9 +114,8 @@ class _signUpPageState extends State<signUpPage> {
                               7) // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
                       {
                         return "Please enter at least 6 digit password";
-                      } else {
-                        return null!;
                       }
+                      return null;
                     },
                     obscureText: signUpNotifier.obsecureText,
                     suffixIcon: GestureDetector(
@@ -159,32 +157,24 @@ class _signUpPageState extends State<signUpPage> {
                   CustomButton(
                       text: 'Sign Up',
                       onTap: () {
-                        SignUpModel model = SignUpModel(
-                            email: email.text,
-                            password: password.text,
-                            username: name.text);
+                        if (signUpNotifier.validateFormAndSave()) {
+                          SignUpModel model = SignUpModel(
+                              email: email.text,
+                              password: password.text,
+                              username: name.text);
+// user registration complete korle first time false kore deya hobe jeno next time login korte gele profile update page show na kore
+                          loginNotifier.firstTime = !loginNotifier.firstTime;
 
-                        // user registration complete korle first time false kore deya hobe jeno next time login korte gele profile update page show na kore
-                        loginNotifier.firstTime = !loginNotifier.firstTime;
-
-                        signUpNotifier.signUp(model);
-                        // i comment out form validate because current version flutter does not support it
-//               if(signUpNotifier.validateFormAndSave())
-//                 {
-// SignUpModel model = SignUpModel(
-//     email: email.text,
-//     password: password.text,
-//     username: name.text);
-//
-// signUpNotifier.signUp(model);
-//                 }else{
-//                 Get.snackbar(
-//                   "Sign up Failed",
-//                   "Please Check your credentials and try again",
-//                   colorText: Colors.white,
-//                   backgroundColor: Colors.red,
-//                   icon: const Icon(Icons.add_alert),
-//                 );
+                          signUpNotifier.signUp(model);
+                        } else {
+                          Get.snackbar(
+                            "Sign up Failed",
+                            "Please Check your credentials and try again",
+                            colorText: Colors.white,
+                            backgroundColor: Colors.red,
+                            icon: const Icon(Icons.add_alert),
+                          );
+                        }
                       })
                 ],
               ),

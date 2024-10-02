@@ -49,7 +49,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
       body: Consumer<LoginNotifier>(  // LoginNotifier which is provider file(must same this name)
         builder: (context, loginNotifier, child) {  // loginNotifier use any name here
         return Form(
-          key: loginNotifier.loginFormKey,
+          key: loginNotifier.profileFormKey,
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 20,vertical: 60),
             children: [
@@ -176,7 +176,7 @@ if(imageUploader.imageFil.isEmpty && imageUploader.imageUrl == null)
     );
   }else
     {
-      if(loginNotifier.validateAndSave())
+      if(loginNotifier.profileValidation())
         {
           ProfileUpdateModel model = ProfileUpdateModel(
               location: location.text,

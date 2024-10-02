@@ -4,6 +4,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final TextInputType? keyboardType;
+  // below this line code see carefully
   final String? Function(String?)? validator;  //final String?(this null important) otherwise return null show error> Function(String?)? validator;
   final Widget? suffixIcon;
   final bool? obscureText;
