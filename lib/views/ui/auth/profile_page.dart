@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:job_finder_app/constants/constant.dart';
 import 'package:job_finder_app/controllers/profile_provider.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
+import 'package:job_finder_app/views/ui/auth/profile_update.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/app_bar.dart';
@@ -59,8 +61,8 @@ class ProfilePage extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                          child: Image.asset(
-                            'assets/images/profile.jpg',
+                          child: Image.network(
+                            userData!.profile,
                             width: 80,
                             height: 100,
                           ),
@@ -98,7 +100,9 @@ class ProfilePage extends StatelessWidget {
                           ],
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(ProfileUpdate(profile: userData,));
+                          },
                           child: Icon(
                             Icons.edit_calendar_outlined,
                             size: 18,
@@ -194,9 +198,9 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           SvgPicture.asset("assets/icon/Flag_of_Bangladesh.svg",height: 20,width: 20,),
                           SizedBox(width: 15,),
-                          // ReusableText(text: userData.phone,style: TextStyle(
-                          //     fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600
-                          // ),),
+                          ReusableText(text: userData.phone??"",style: TextStyle(
+                              fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600
+                          ),),
                         ],
                       ),
                     ),
@@ -218,7 +222,7 @@ class ProfilePage extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                             child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: AlwaysScrollableScrollPhysics(),
                               itemCount: userData.skills.length,
                               itemBuilder: (context, index) {
                                 return Padding(

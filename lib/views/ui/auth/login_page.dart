@@ -77,13 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: "Password",
                     keyboardType: TextInputType.text,
                     validator: (password){
-                      if(password!.isEmpty || password.length<7)  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
+                      if(password!.isEmpty || password.length<6)  // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
                           {
+
                         return "Please enter at least 6 digit password";
                       }
-                      else{
-                        return null;
-                      }
+                      return null;
                     },
                     obscureText: loginNotifier.obsecureText,
                     suffixIcon: GestureDetector(
@@ -110,11 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                   CustomButton(text: 'Login',
                       onTap: (){
 
-                          LoginModel model = LoginModel(
-                              email: email.text,
-                              password: password.text);
 
-                          loginNotifier.userLogin(model);
 
                     // i get form (null) error so i comment out this code
                         if(loginNotifier.validateAndSave())
@@ -123,14 +118,16 @@ class _LoginPageState extends State<LoginPage> {
                               email: email.text,
                               password: password.text);
                           loginNotifier.userLogin(model);
-                        }else{
-                          Get.snackbar("Sign Failed", "Please check your credentials",
+                        }
+                        else{
+                          Get.snackbar("Sign Failed",
+                              "Please fill this field",
                               colorText: Colors.white,
                               backgroundColor: Colors.red,
                               icon: Icon(Icons.add_alert)
                           );
                         }
-              // Get.to(MainScreen());
+
                       }
                   )
 

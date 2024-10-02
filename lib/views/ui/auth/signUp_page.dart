@@ -111,7 +111,7 @@ class _signUpPageState extends State<signUpPage> {
                     validator: (password) {
                       if (password!.isEmpty ||
                           password.length <
-                              7) // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
+                              6) // email filed jodi empty hoi and @ na thake tahole invalid message return korbe
                       {
                         return "Please enter at least 6 digit password";
                       }
@@ -157,19 +157,20 @@ class _signUpPageState extends State<signUpPage> {
                   CustomButton(
                       text: 'Sign Up',
                       onTap: () {
+                        // user registration complete korle first time false kore deya hobe jeno next time login korte gele profile update page show na kore
+                        loginNotifier.firstTime = !loginNotifier.firstTime;
+
                         if (signUpNotifier.validateFormAndSave()) {
                           SignUpModel model = SignUpModel(
                               email: email.text,
                               password: password.text,
                               username: name.text);
-// user registration complete korle first time false kore deya hobe jeno next time login korte gele profile update page show na kore
-                          loginNotifier.firstTime = !loginNotifier.firstTime;
 
                           signUpNotifier.signUp(model);
                         } else {
                           Get.snackbar(
                             "Sign up Failed",
-                            "Please Check your credentials and try again",
+                            "Please fill this field",
                             colorText: Colors.white,
                             backgroundColor: Colors.red,
                             icon: const Icon(Icons.add_alert),
