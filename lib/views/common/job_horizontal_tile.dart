@@ -16,7 +16,7 @@ class JobHorizontalTile extends StatelessWidget {
         padding: const EdgeInsets.only(right: 12),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-          width: MediaQuery.of(context).size.width*0.7,
+          width: MediaQuery.of(context).size.width*0.75,
           height: MediaQuery.of(context).size.height*0.27,
           color: Colors.blueGrey,
           child: Column(
@@ -53,8 +53,8 @@ class JobHorizontalTile extends StatelessWidget {
                   Row(
 
                     children: [
-                  ReusableText(text: job!.salary, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Colors.black)),
-                  ReusableText(text: "/${job!.period}", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Colors.black)),
+                 ReusableText(text: job!.salary, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20,color: Colors.black)),
+                 ReusableText(text: "/${job!.period}", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20,color: Colors.black)),
 
                     ],
                   ),

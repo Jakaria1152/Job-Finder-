@@ -13,7 +13,7 @@ class JobsResponse {
   final String contract;
   final List<String> requirements;
   final String imageUrl;
-  final String agentId;
+  String? agentId;  // this not find in response data, so i make it nullable variable
 
   JobsResponse({
     required this.id,
@@ -26,7 +26,7 @@ class JobsResponse {
     required this.contract,
     required this.requirements,
     required this.imageUrl,
-    required this.agentId,
+    this.agentId,
   });
 
   factory JobsResponse.fromJson(Map<String, dynamic> json) => JobsResponse(
@@ -40,7 +40,7 @@ class JobsResponse {
     contract: json["contract"],
     requirements: List<String>.from(json["requirements"].map((x) => x)),
     imageUrl: json["imageUrl"],
-    agentId: json["agentId"],
+    agentId: json["agentId"]??"", // nullable data
   );
 
   Map<String, dynamic> toJson() => {

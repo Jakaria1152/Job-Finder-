@@ -25,7 +25,9 @@ class JobHelper{
     if(response!.statusCode == 200)
     {
       var jobsList;
-      print(jsonDecode(response.body));
+      // all time compare response data to model data. If any variable miss make it nullable
+      // print(jsonDecode(response.body)); // this is helpful when not find proper error in response data
+
       try{
         jobsList = jobsResponseFromJson(response.body);
       }catch(e)
