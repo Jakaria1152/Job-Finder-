@@ -42,4 +42,39 @@ class JobHelper{
     }
 
   }
+
+  // Get Recent Job
+  static Future<JobsResponse> getRecentJobs()async{
+    http.Response? response;
+    Map<String, String> requestHeaders = {
+      "Content-Type": "application/json",
+    };
+    try{
+      response = await http.get(Uri.parse('${Config.apiUrl}${Config.jobs}'),
+          headers: requestHeaders);
+    }catch(e)
+    {
+      print('api call error: $e');
+    }
+
+    if(response!.statusCode == 200)
+    {
+      var jobsList;
+      var recent;
+           try{
+        jobsList = jobsResponseFromJson(response.body);
+        // last insert kora job ta first a thakbe tai aitake recent er modde neya hosse
+        recent = jobsList.first;
+      }catch(e)
+      {
+        print('error is $e');
+      }
+
+      return recent;
+    }
+    else{
+      throw Exception('Failed to get Recent Job');
+    }
+
+  }
 }

@@ -6,6 +6,7 @@ import 'package:job_finder_app/views/common/drawer/drawerWidget.dart';
 import 'package:job_finder_app/views/common/heading_widget.dart';
 import 'package:job_finder_app/views/common/job_horizontal_tile.dart';
 import 'package:job_finder_app/views/common/searchWidget.dart';
+import 'package:job_finder_app/views/common/vertical_shimmer.dart';
 import 'package:job_finder_app/views/ui/Jobs/job_page.dart';
 import 'package:job_finder_app/views/ui/search_page.dart';
 import 'package:provider/provider.dart';
@@ -45,89 +46,121 @@ class _HomePageState extends State<HomePage> {
         builder: (context, jobNotifier, child) {
           // Firstly getAll Jobs
           jobNotifier.getJobs();
-        return SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    'Search\nFind & Apply',
-                    style: TextStyle(
-                        fontSize: 40,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  SearchWidget(
-                    onTap: () {
-                      Get.to( SearchPage());
-                    },
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  HeadingWidget(
-                    text: "Popular Jobs",
-                    onTap: () {},
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  SizedBox(
-                    // height define kore na dile overflow error dibe. karon koto tuku height nibe ai builder bujhte pare na
-                    height: MediaQuery.of(context).size.height * 0.28,
-                    child: FutureBuilder(
-                      // jobList take access kore neya hosse
-                      future: jobNotifier.jobList,
+          // get recent job
+          jobNotifier.getRecent();
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      'Search\nFind & Apply',
+                      style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    SearchWidget(
+                      onTap: () {
+                        Get.to(SearchPage());
+                      },
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    HeadingWidget(
+                      text: "Popular Jobs",
+                      onTap: () {},
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      // height define kore na dile overflow error dibe. karon koto tuku height nibe ai builder bujhte pare na
+                      height: MediaQuery.of(context).size.height * 0.28,
+                      child: FutureBuilder(
+                        // jobList take access kore neya hosse
+                        future: jobNotifier.jobList,
                         builder: (context, snapshot) {
-if(snapshot.connectionState == ConnectionState.waiting)
-  {
-    return Container();
-  }
-else if(snapshot.hasError)
-  {
-    return Center(child: Text('Error is: ${snapshot.error}'),);
-  }
-else{
-final jobs = snapshot.data;
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Container();
+                          } else if (snapshot.hasError) {
+                            return Center(
+                              child: Text('Error is: ${snapshot.error}'),
+                            );
+                          } else {
+                            final jobs = snapshot.data;
 // be careful return otherwise not find what happend error. because not use return does not show any info
-return ListView.builder(
-  scrollDirection: Axis.horizontal,
-  itemCount: jobs?.length,
-  itemBuilder: (context, index) {
-    final job = jobs?[index];
-    return JobHorizontalTile(
-job: job,
-    onTap: () {
-      Get.to(JobPage(title: job!.title,id: job.id,));
-    },
-  );
-          }
-);
-}
-                        },),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  HeadingWidget(
-                    text: "Recently Posted",
-                    onTap: () {},
-                  ),
-                  VerticalTile()
-                ],
+                            return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: jobs?.length,
+                                itemBuilder: (context, index) {
+                                  final job = jobs?[index];
+                                  return JobHorizontalTile(
+                                    job: job,
+                                    onTap: () {
+                                      Get.to(JobPage(
+                                        title: job!.title,
+                                        id: job.id,
+                                      ));
+                                    },
+                                  );
+                                });
+                          }
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    HeadingWidget(
+                      text: "Recently Posted",
+                      onTap: () {},
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    FutureBuilder(
+                      // jobList take access kore neya hosse
+                      future: jobNotifier.recent,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          // show animation see it carefully
+                          return const VerticalShimmer();
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text('Error is: ${snapshot.error}'),
+                          );
+                        } else {
+                          var job = snapshot.data!; // ! for surity not nullable
+// be careful return otherwise not find what happend error. because not use return does not show any info
+                          return VerticalTile(
+                            job: job,// ! use upper gone error here
+                            onTap: (){
+                              Get.to(JobPage(title: job.title, id: job.id));
+                            },
+                          ); 
+                        }
+                      },
+                    )
+                    // VerticalTile()
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },),
+          );
+        },
+      ),
     );
   }
 }
