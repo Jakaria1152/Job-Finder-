@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:job_finder_app/model/response/job/jobs_response.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 
 class JobHorizontalTile extends StatelessWidget {
   final void Function()? onTap;
+  final JobsResponse? job;
 
-  const JobHorizontalTile({super.key, this.onTap});
+  const JobHorizontalTile({super.key, this.onTap, required this.job});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,11 @@ class JobHorizontalTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/facebook.png"),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(job!.imageUrl),
                   ),
                   const SizedBox(width: 15,),
-                  ReusableText(text: "FaceBook", style: const TextStyle(
+                  ReusableText(text: job!.company, style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
                     fontSize: 26
@@ -35,25 +36,25 @@ class JobHorizontalTile extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 15,),
-              ReusableText(text: "Senior Flutter Developer", style: const TextStyle(
+              ReusableText(text: job!.title, style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                   fontSize: 20
               )),
-              ReusableText(text: "Dhaka, BanglaDesh", style: const TextStyle(
+              ReusableText(text: job!.location, style: const TextStyle(
                   color: Colors.grey,
                   fontWeight: FontWeight.w600,
                   fontSize: 16
               )),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
 
                     children: [
-                  ReusableText(text: "40k", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Colors.black)),
-                  ReusableText(text: "/monthly", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Colors.black)),
+                  ReusableText(text: job!.salary, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Colors.black)),
+                  ReusableText(text: "/${job!.period}", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Colors.black)),
 
                     ],
                   ),
