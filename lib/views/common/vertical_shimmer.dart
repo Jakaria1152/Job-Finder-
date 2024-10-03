@@ -17,7 +17,7 @@ class VerticalShimmer extends StatelessWidget {
           colors: [
             Colors.grey,
             Colors.lightBlue,
-            Colors.blueGrey,
+            Colors.lime,
           ],
         ),
       ],
@@ -25,7 +25,7 @@ class VerticalShimmer extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         height: size.height * 0.15,
         width: size.width,
-        color: Colors.blueGrey,
+        color: Colors.lightGreenAccent,
       ),
     );
   }
