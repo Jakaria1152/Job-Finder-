@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/controllers/image_provider.dart';
+import 'package:job_finder_app/controllers/job_provider.dart';
 import 'package:job_finder_app/controllers/login_provider.dart';
 import 'package:job_finder_app/controllers/profile_provider.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
@@ -39,6 +40,7 @@ void main()async{
       ChangeNotifierProvider(create: (context) => ZoomNotifier(),),
       ChangeNotifierProvider(create: (context) => ImageUploader(),),
       ChangeNotifierProvider(create: (context) => ProfileNotifier(),),
+      ChangeNotifierProvider(create: (context) => JobNotifier(),),
     ],child: myApp(),)
   );
 }
