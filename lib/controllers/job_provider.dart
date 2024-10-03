@@ -5,6 +5,7 @@ import 'package:job_finder_app/services/authHelper/job_helper.dart';
 class JobNotifier extends ChangeNotifier{
   late Future<List<JobsResponse>> jobList;
   late Future<JobsResponse> recent;
+  late Future<JobsResponse> job;
 
   getJobs(){
     jobList = JobHelper.getJobs(); // getJobs function static tai JobHelper() airokom kora lageni
@@ -12,6 +13,9 @@ class JobNotifier extends ChangeNotifier{
 
   getRecent(){
     recent = JobHelper.getRecentJobs();
+  }
+  getJob(String jobId){
+    job = JobHelper.getJob(jobId);
   }
 
 }

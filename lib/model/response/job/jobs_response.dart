@@ -1,6 +1,8 @@
 import 'dart:convert';
-
+// all job return korbe
 List<JobsResponse> jobsResponseFromJson(String str) => List<JobsResponse>.from(json.decode(str).map((x) => JobsResponse.fromJson(x)));
+// single job return korbe
+JobsResponse singleJobResponseFromJson(String str) =>  JobsResponse.fromJson(jsonDecode(str));
 
 class JobsResponse {
   final String id;
