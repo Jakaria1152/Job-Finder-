@@ -24,8 +24,8 @@ class _SearchPageState extends State<SearchPage> {
 appBar: AppBar(
   backgroundColor: Colors.deepOrange,
   iconTheme: IconThemeData(color: Colors.white),  // all item color white kore dibe
-  title: CustomTextField(
-    controller: search,
+  title: CustomField(
+    search: search,
     hintText: "Search for a Job",
   suffixIcon: GestureDetector(
     onTap: (){
@@ -60,7 +60,10 @@ setState(() {
                   itemCount: jobs?.length,
                   itemBuilder: (context, index) {
                   final job = jobs?[index];
-                  return VerticalTile(job: job!); // if show error use ! null check
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                    child: VerticalTile(job: job!),
+                  ); // if show error use ! null check
                 },);
               }
           },)
