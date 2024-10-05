@@ -13,7 +13,7 @@ class VerticalTile extends StatelessWidget {
 onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-        height: MediaQuery.of(context).size.height*0.15,
+        height: MediaQuery.of(context).size.height*0.18,
         width: double.infinity,
         color: Colors.blueGrey,
         child: Column(
