@@ -5,6 +5,7 @@ import 'package:job_finder_app/services/authHelper/job_helper.dart';
 import 'package:job_finder_app/views/common/VerticalTile.dart';
 import 'package:job_finder_app/views/common/custom_text_field.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
+import 'package:job_finder_app/views/ui/Jobs/job_page.dart';
 import 'package:job_finder_app/views/ui/widget/customField.dart';
 
 class SearchPage extends StatefulWidget {
@@ -62,7 +63,13 @@ setState(() {
                   final job = jobs?[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                    child: VerticalTile(job: job!),
+                    child: GestureDetector(
+                        onTap: (){
+                          Get.to(JobPage(
+                              title: job.title,
+                              id: job.id));
+                        },
+                        child: VerticalTile(job: job!)),
                   ); // if show error use ! null check
                 },);
               }
