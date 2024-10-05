@@ -113,4 +113,41 @@ class JobHelper{
     }
 
   }
+
+  // SEARCH JOB
+  static Future<List<JobsResponse>> searchJobs(String searchQuery)async{
+    http.Response? response;
+    Map<String, String> requestHeaders = {
+      "Content-Type": "application/json",
+    };
+
+    try{
+      response = await http.get(Uri.parse('${Config.apiUrl}${Config.search}/$searchQuery'),
+          headers: requestHeaders);
+    }catch(e)
+    {
+      print('api call error: $e');
+    }
+
+    if(response!.statusCode == 200)
+    {
+
+      var jobsList;
+      // all time compare response data to model data. If any variable miss make it nullable
+      // print(jsonDecode(response.body)); // this is helpful when not find proper error in response data
+
+      try{
+        jobsList = jobsResponseFromJson(response.body);
+      }catch(e)
+      {
+        print('error is $e');
+      }
+
+      return jobsList;
+    }
+    else{
+      throw Exception('Failed to get JobsList');
+    }
+
+  }
 }

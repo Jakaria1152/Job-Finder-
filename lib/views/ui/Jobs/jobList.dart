@@ -46,7 +46,7 @@ class JoblistPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final job = jobs?[index];  // single requirement
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 7,horizontal: 3),
+                  padding: const EdgeInsets.symmetric(vertical: 7,horizontal: 7),
                   child: GestureDetector(
                       onTap: (){
                         Get.to(

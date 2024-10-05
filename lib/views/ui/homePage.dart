@@ -9,7 +9,7 @@ import 'package:job_finder_app/views/common/searchWidget.dart';
 import 'package:job_finder_app/views/common/vertical_shimmer.dart';
 import 'package:job_finder_app/views/ui/Jobs/job_page.dart';
 import 'package:job_finder_app/views/ui/Jobs/jobList.dart';
-import 'package:job_finder_app/views/ui/search_page.dart';
+import 'package:job_finder_app/views/ui/Search/search_page.dart';
 import 'package:provider/provider.dart';
 
 import '../common/VerticalTile.dart';
