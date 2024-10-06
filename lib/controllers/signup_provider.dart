@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'dart:async';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:job_finder_app/model/request/signUpModel.dart';
-import 'package:job_finder_app/services/authHelper/auth_helper.dart';
+import 'package:job_finder_app/services/helper/auth_helper.dart';
 import 'package:job_finder_app/views/ui/auth/login_page.dart';
 
 class SignUpNotifier extends ChangeNotifier{

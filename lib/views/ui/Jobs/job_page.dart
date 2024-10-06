@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/constants/constant.dart';
+import 'package:job_finder_app/controllers/bookmark_provider.dart';
 import 'package:job_finder_app/controllers/job_provider.dart';
+import 'package:job_finder_app/model/request/Bookmark/bookmark_request.dart';
 import 'package:job_finder_app/views/common/app_bar.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,8 @@ class JobPage extends StatefulWidget {
 class _JobPageState extends State<JobPage> {
   @override
   Widget build(BuildContext context) {
+    final bookmarkNotifier = Provider.of<BookMarkNotifier>(context);
+    bookmarkNotifier.loadJobs();
     return Consumer<JobNotifier>(
       builder: (context, jobNotifier, child) {
         // ai page open hoyar sathe sathe single job fetch kore niye ashbe
@@ -34,10 +38,16 @@ class _JobPageState extends State<JobPage> {
                 },
                 child: const Icon(CupertinoIcons.arrow_left),
               ),
-              actions: const [
-                Padding(
-                  padding: EdgeInsets.only(right: 12),
-                  child: Icon(Icons.bookmark),
+              actions: [
+                GestureDetector(
+                  onTap: (){
+                    BookmarkRequest model = BookmarkRequest(job: widget.id);
+bookmarkNotifier.addBookMark(model, widget.id);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 12),
+                    child: !bookmarkNotifier.jobs.contains(widget.id) ? Icon(Icons.bookmark_outline): Icon(Icons.bookmark),
+                  ),
                 )
               ],
             ),

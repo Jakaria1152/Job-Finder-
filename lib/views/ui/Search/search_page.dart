@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/model/response/job/jobs_response.dart';
-import 'package:job_finder_app/services/authHelper/job_helper.dart';
 import 'package:job_finder_app/views/common/VerticalTile.dart';
 import 'package:job_finder_app/views/common/custom_text_field.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/Jobs/job_page.dart';
 import 'package:job_finder_app/views/ui/widget/customField.dart';
+
+import '../../../services/helper/job_helper.dart';
 
 class SearchPage extends StatefulWidget {
 

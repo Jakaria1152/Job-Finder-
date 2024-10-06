@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/model/request/profile_update_model.dart';
-import 'package:job_finder_app/services/authHelper/auth_helper.dart';
+import 'package:job_finder_app/services/helper/auth_helper.dart';
 import 'package:job_finder_app/views/ui/auth/update_user.dart';
 import 'package:job_finder_app/views/ui/mainScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';

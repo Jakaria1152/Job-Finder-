@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-BookMarkRes bookMarkResFromJson(String str) => BookMarkRes.fromJson(json.decode(str));
+BookMarkRes bookMarkResFromJson(String str) => BookMarkRes.fromJson(jsonDecode(str));
 
-String bookMarkResToJson(BookMarkRes data) => json.encode(data.toJson());
+String bookMarkResToJson(BookMarkRes data) => jsonEncode(data.toJson());
 
 class BookMarkRes {
   final String job;
