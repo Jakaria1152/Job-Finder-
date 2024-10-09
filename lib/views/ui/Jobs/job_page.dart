@@ -43,9 +43,11 @@ class _JobPageState extends State<JobPage> {
                   onTap: (){
                     if(bookmarkNotifier.jobs.contains(widget.id))
                       {
+
 bookmarkNotifier.deleteBookMark(widget.id);
                       }
                     else{
+
                       BookmarkRequest model = BookmarkRequest(job: widget.id);
                       bookmarkNotifier.addBookMark(model, widget.id);
                     }

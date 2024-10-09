@@ -72,7 +72,7 @@ class BookMarkNotifier extends ChangeNotifier{
             icon: const Icon(Icons.bookmark_add)
         );
       }else if(!response){
-        Get.snackbar("Failed to Add BookMark", "Please try again",
+        Get.snackbar("Failed to delete BookMark", "Please try again",
             colorText: Colors.white,
             backgroundColor: Colors.red,
             icon: const Icon(Icons.bookmark_add)

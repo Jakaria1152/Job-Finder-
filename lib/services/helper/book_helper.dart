@@ -47,6 +47,7 @@ class BookMarkHelper{
   static Future<bool> deleteBookmarks(String jobId)async{
     final SharedPreferences pref = await SharedPreferences.getInstance();
     String? token = pref.getString("token");
+
     // String? userId = pref.getString('userId');
 
     http.Response? response;
@@ -67,7 +68,7 @@ class BookMarkHelper{
 
     if(response!.statusCode == 200)
     {
-      print("delete");
+      // print("delete");
       return true;
     }
     else{
