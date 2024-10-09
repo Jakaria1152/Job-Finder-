@@ -54,12 +54,12 @@ class JobHorizontalTile extends StatelessWidget {
 
                     children: [
                  ReusableText(text: job!.salary, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20,color: Colors.black)),
-                 ReusableText(text: "/${job!.period}", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20,color: Colors.black)),
+                 ReusableText(text: "/${job!.period}", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18,color: Colors.black)),
 
                     ],
                   ),
                   const CircleAvatar(
-                    radius: 18,
+                    radius: 15,
                     backgroundColor: Colors.white,
                     child: Icon(Icons.chevron_right_sharp),
                   )

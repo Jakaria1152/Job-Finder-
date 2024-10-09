@@ -12,6 +12,8 @@ class ReusableText extends StatelessWidget {
     return Text(
       text,
       style: style,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

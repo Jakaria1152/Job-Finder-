@@ -90,16 +90,18 @@ class SearchLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset('assets/icon/optimized search.jpg', fit: BoxFit.cover,),
-          ReusableText(text: text, style: TextStyle(
-            fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold
-          ))
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/icon/optimized search.jpg', fit: BoxFit.cover,),
+            ReusableText(text: text, style: TextStyle(
+              fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold
+            ))
+          ],
+        ),
       ),
     );
   }
