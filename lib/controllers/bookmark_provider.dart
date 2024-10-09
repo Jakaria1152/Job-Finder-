@@ -22,6 +22,16 @@ class BookMarkNotifier extends ChangeNotifier{
       }
   }
 
+  Future<void> removeJob(String jobId)async{
+    final prefs = await SharedPreferences.getInstance();
+    if(_jobs != null)
+    {
+      _jobs.remove(jobId);
+      prefs.setStringList("jobId", _jobs);
+      notifyListeners();
+    }
+  }
+
   Future<void> loadJobs()async{
     final prefs = await SharedPreferences.getInstance();
     final jobs = prefs.getStringList('jobId');
@@ -47,6 +57,27 @@ class BookMarkNotifier extends ChangeNotifier{
               icon: const Icon(Icons.bookmark_add)
           );
         }
+    });
+
+  }
+
+  deleteBookMark(String jobId){
+    BookMarkHelper.deleteBookmarks(jobId).then((response){
+      // success hole 0 index a true and failed hole false
+      if(response){
+        removeJob(jobId);
+        Get.snackbar("BookMark Successfully Deleted", "Please Check your Bookmark",
+            colorText: Colors.white,
+            backgroundColor: Colors.orangeAccent,
+            icon: const Icon(Icons.bookmark_add)
+        );
+      }else if(!response){
+        Get.snackbar("Failed to Add BookMark", "Please try again",
+            colorText: Colors.white,
+            backgroundColor: Colors.red,
+            icon: const Icon(Icons.bookmark_add)
+        );
+      }
     });
 
   }

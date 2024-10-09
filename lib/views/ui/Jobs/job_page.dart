@@ -41,8 +41,14 @@ class _JobPageState extends State<JobPage> {
               actions: [
                 GestureDetector(
                   onTap: (){
-                    BookmarkRequest model = BookmarkRequest(job: widget.id);
-bookmarkNotifier.addBookMark(model, widget.id);
+                    if(bookmarkNotifier.jobs.contains(widget.id))
+                      {
+bookmarkNotifier.deleteBookMark(widget.id);
+                      }
+                    else{
+                      BookmarkRequest model = BookmarkRequest(job: widget.id);
+                      bookmarkNotifier.addBookMark(model, widget.id);
+                    }
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 12),
