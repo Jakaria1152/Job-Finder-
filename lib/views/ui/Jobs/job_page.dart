@@ -40,21 +40,19 @@ class _JobPageState extends State<JobPage> {
               ),
               actions: [
                 GestureDetector(
-                  onTap: (){
-                    if(bookmarkNotifier.jobs.contains(widget.id))
-                      {
-
-bookmarkNotifier.deleteBookMark(widget.id);
-                      }
-                    else{
-
+                  onTap: () {
+                    if (bookmarkNotifier.jobs.contains(widget.id)) {
+                      bookmarkNotifier.deleteBookMark(widget.id);
+                    } else {
                       BookmarkRequest model = BookmarkRequest(job: widget.id);
                       bookmarkNotifier.addBookMark(model, widget.id);
                     }
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: 12),
-                    child: !bookmarkNotifier.jobs.contains(widget.id) ? Icon(Icons.bookmark_outline): Icon(Icons.bookmark),
+                    child: !bookmarkNotifier.jobs.contains(widget.id)
+                        ? Icon(Icons.bookmark_outline)
+                        : Icon(Icons.bookmark),
                   ),
                 )
               ],
@@ -91,8 +89,7 @@ bookmarkNotifier.deleteBookMark(widget.id);
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(job!.imageUrl),
+                                  backgroundImage: NetworkImage(job!.imageUrl),
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -127,10 +124,8 @@ bookmarkNotifier.deleteBookMark(widget.id);
                                             backgroundColor: Colors.white,
                                             foregroundColor: Colors.deepOrange,
                                           ),
-                                          onPressed: () {
-
-                                          },
-                                          child:  Text(job.period)),
+                                          onPressed: () {},
+                                          child: Text(job.period)),
                                       Row(
                                         children: [
                                           ReusableText(
@@ -190,9 +185,11 @@ bookmarkNotifier.deleteBookMark(widget.id);
                             height: MediaQuery.of(context).size.height * 0.6,
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: job.requirements.length, // requirement length
+                              itemCount:
+                                  job.requirements.length, // requirement length
                               itemBuilder: (context, index) {
-                                final req = job.requirements[index];  // single requirement
+                                final req = job
+                                    .requirements[index]; // single requirement
                                 String bullet = "\u2022 ";
 
                                 return Text(
@@ -215,9 +212,7 @@ bookmarkNotifier.deleteBookMark(widget.id);
                           style: OutlinedButton.styleFrom(
                               backgroundColor: Colors.deepOrange,
                               foregroundColor: Colors.white),
-                          onPressed: () {
-
-                          },
+                          onPressed: () {},
                           child: Text('Apply Now'),
                         ),
                       ),

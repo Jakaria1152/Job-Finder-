@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/model/request/Bookmark/bookmark_request.dart';
+import 'package:job_finder_app/model/response/Bookmark/all_bookmark.dart';
 import 'package:job_finder_app/services/helper/book_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BookMarkNotifier extends ChangeNotifier{
+  Future<List<AllBookMarkRes>>? bookmarks;
   List<String> _jobs = [];
   List<String> get jobs => _jobs;
   set jobs(List<String> newList){
@@ -80,5 +82,9 @@ class BookMarkNotifier extends ChangeNotifier{
       }
     });
 
+  }
+  getBookMarks()
+  {
+    bookmarks = BookMarkHelper.getBookmarks();
   }
 }
