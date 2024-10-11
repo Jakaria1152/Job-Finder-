@@ -9,7 +9,7 @@ String allBookMarkResToJson(List<AllBookMarkRes> data) => json.encode(List<dynam
 
 class AllBookMarkRes {
   final String id;
-  final JobsResponse job;
+  final JobsResponse? job;
   final String userId;
 
   AllBookMarkRes({
@@ -26,7 +26,7 @@ class AllBookMarkRes {
 
   Map<String, dynamic> toJson() => {
     "_id": id,
-    "job": job.toJson(),
+    "job": job?.toJson()??[],
     "userId": userId,
   };
 }
