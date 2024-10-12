@@ -58,4 +58,9 @@ class JobsResponse {
     "imageUrl": imageUrl,
     "agentId": agentId,
   };
+
+  // this is used for testing data inside class
+  // String toStringFucntion() {
+  //   return 'JobsResponse(title: $title, salary: $salary, location: $location)';
+  // }
 }

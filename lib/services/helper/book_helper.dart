@@ -29,7 +29,7 @@ class BookMarkHelper{
       print('BookMark Add api call error: $e');
     }
 
-    if(response!.statusCode == 200)
+    if(response!.statusCode == 201)
     {
       var body = jsonDecode(response!.body);
       String bookMarkId = body['_id'];
@@ -98,15 +98,19 @@ class BookMarkHelper{
     {
       print('BookMark Add api call error: $e');
     }
-print(response!.statusCode);
+// print(response!.statusCode);
     if(response!.statusCode == 200)
     {
-      print(jsonDecode(response.body));
-      var bookmarks = allBookMarkResFromJson(response.body);
-      print('bookmark is>>>>');
-      print(bookmarks);
-      // print("delete");
-      return bookmarks;
+      // print(jsonDecode(response.body));
+      List<AllBookMarkRes> bookmarkList = allBookMarkResFromJson(response.body);
+
+
+      // print('bookmarkList is>>>>');
+      // print(bookmarkList.length);
+      // print(bookmarkList[0].job);
+
+
+      return bookmarkList;
     }
     else{
       throw Exception('Failed to get bookmarks');

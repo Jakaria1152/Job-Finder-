@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:job_finder_app/model/response/job/jobs_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -94,17 +92,19 @@ class JobHelper{
 
     if(response!.statusCode == 200)
     {
-      var job;
+      // print(response.body.runtimeType);
+      // use nullbale also return type nullable because its assign data on try block
+      JobsResponse job; // make correct data type not use var or final
       // all time compare response data to model data. If any variable miss make it nullable
-      // print(jsonDecode(response.body)); // this is helpful when not find proper error in response data
+      //print(jsonDecode(response.body)); // this is helpful when not find proper error in response data
 
-      try{
         job = singleJobResponseFromJson(response.body);
-        print(job);
-      }catch(e)
-      {
-        print('error is $e');
-      }
+        // print(job.title);
+        // print(job.salary);
+        // print(job.location);
+
+        // print(job.toStringFucntion());
+
 
       return job;
     }
