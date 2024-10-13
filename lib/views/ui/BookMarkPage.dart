@@ -59,15 +59,9 @@ class BookMarkPage extends StatelessWidget {
 
                   itemBuilder: (context, index) {
                     var bookmark = bookmarks[index];  // single bookmark from list
-                    print(bookmark);
-                    return Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: VerticalTileBookMark(job: bookmark.job,
-                      user: bookmark.userId,onTap: (){
-
-                        },
-                      ),
-                    );
+return VerticalTile(job: bookmark.job, onTap: (){
+  Get.to(JobPage(title: bookmark.job.company, id: bookmark.job.id));
+},);
                   }): Center(child: Text("You haven't already created any bookmark"));
             }
           },

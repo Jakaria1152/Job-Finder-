@@ -105,7 +105,8 @@ class BookMarkHelper{
       List<AllBookMarkRes> bookmarkList = allBookMarkResFromJson(response.body);
 
 
-      // print('bookmarkList is>>>>');
+     // print('bookmarkList is>>>>');
+
       // print(bookmarkList.length);
       // print(bookmarkList[0].job);
 
