@@ -81,7 +81,7 @@ class BookMarkHelper{
     final SharedPreferences pref = await SharedPreferences.getInstance();
     String? token = pref.getString("token");
 
-    // String? userId = pref.getString('userId');
+    String? userId = pref.getString('userId');
 
     http.Response? response;
     Map<String, String> requestHeaders = {
@@ -90,7 +90,7 @@ class BookMarkHelper{
     };
     try{
       response = await http.get(
-        Uri.parse('${Config.apiUrl}${Config.bookmarkUrl}'),
+        Uri.parse('${Config.apiUrl}${Config.bookmarkUrl}/$userId'),
         headers: requestHeaders,
       )
       ;
