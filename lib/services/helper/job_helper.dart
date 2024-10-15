@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'package:job_finder_app/model/response/job/jobs_response.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config.dart';
 
