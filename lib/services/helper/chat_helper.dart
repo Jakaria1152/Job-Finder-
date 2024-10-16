@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:job_finder_app/model/request/Chat/create_chat.dart';
 import 'package:job_finder_app/model/response/Chat/get_chat.dart';
@@ -55,7 +57,7 @@ class Chathelper{
       "x-auth-token": '$token'  // this is x-auth-token same as backend req.header("x-auth-token");
     };
     try{
-      response = await http.post(
+      response = await http.get(
           Uri.parse('${Config.apiUrl}${Config.chatsUrl}'),
           headers: requestHeaders,
       )
@@ -67,6 +69,8 @@ class Chathelper{
 
     if(response!.statusCode == 200)
     {
+      // print(jsonDecode(response.body)); // all time see response json structure and name same as model
+      // i get error response is isGroupChat but i use isGroup in model
       var chats = getChatsFromJson(response.body);
       return chats;
     }

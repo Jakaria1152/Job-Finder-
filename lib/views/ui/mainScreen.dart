@@ -3,7 +3,7 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:job_finder_app/controllers/zoom_notifier.dart';
 import 'package:job_finder_app/views/common/drawer/drawerScreen.dart';
 import 'package:job_finder_app/views/ui/BookMarkPage.dart';
-import 'package:job_finder_app/views/ui/chatspage.dart';
+import 'package:job_finder_app/views/ui/Chat/chatsList.dart';
 import 'package:job_finder_app/views/ui/device_management_page.dart';
 import 'package:job_finder_app/views/ui/homePage.dart';
 import 'package:job_finder_app/views/ui/auth/profile_page.dart';
@@ -45,7 +45,7 @@ return ZoomDrawer(
       case 0:
         return const HomePage();
       case 1:
-        return const ChatsPage();
+        return const ChatsList();
       case 2:
         return const BookMarkPage();
       case 3:

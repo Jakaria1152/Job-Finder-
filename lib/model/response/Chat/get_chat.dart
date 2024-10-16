@@ -7,40 +7,44 @@ String getChatsToJson(List<GetChats> data) => json.encode(List<dynamic>.from(dat
 class GetChats {
   final String id;
   final String chatName;
-  final bool isGroup;
+  final bool isGroupChat;  // i get error null is not subtype of bool
+  // response name is (isGroupChat but i use isGroup) this mismatch accor an error
   final List<Sender> users;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final LatestMessage latestMessage;
+  final LatestMessage? latestMessage;  // Nullable LatestMessage
 
   GetChats({
     required this.id,
     required this.chatName,
-    required this.isGroup,
+    required this.isGroupChat,
     required this.users,
     required this.createdAt,
     required this.updatedAt,
-    required this.latestMessage,
+    this.latestMessage,  // Nullable constructor parameter
   });
 
   factory GetChats.fromJson(Map<String, dynamic> json) => GetChats(
     id: json["_id"],
     chatName: json["chatName"],
-    isGroup: json["isGroup"],
+    // false use to avoid null/error
+    isGroupChat: json["isGroupChat"] ?? false,  // response name is (isGroupChat but i use isGroup) this mismatch accor an error
     users: List<Sender>.from(json["users"].map((x) => Sender.fromJson(x))),
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
-    latestMessage: LatestMessage.fromJson(json["latestMessage"]),
+    latestMessage: json["latestMessage"] != null
+        ? LatestMessage.fromJson(json["latestMessage"])
+        : null,  // Handle missing or null latestMessage
   );
 
   Map<String, dynamic> toJson() => {
     "_id": id,
     "chatName": chatName,
-    "isGroup": isGroup,
+    "isGroup": isGroupChat,
     "users": List<dynamic>.from(users.map((x) => x.toJson())),
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
-    "latestMessage": latestMessage.toJson(),
+    "latestMessage": latestMessage?.toJson(), // Handle null safely
   };
 }
 
