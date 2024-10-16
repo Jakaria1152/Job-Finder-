@@ -104,7 +104,7 @@ class LoginNotifier extends ChangeNotifier{
   {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('userId');
-    print('userId is: $userId');
+    // print('userId is: $userId');
     AuthHelper.updateProfile(model,userId??"").then((response){
       // user resgistration korle first time take update profile page niye jawa hobe
       if(response)

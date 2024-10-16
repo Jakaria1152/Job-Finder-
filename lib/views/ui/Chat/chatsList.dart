@@ -18,50 +18,87 @@ class ChatsList extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: CustomAppbar(
-         text: 'Chats',
-
+          text: 'Chats',
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: DrawerWidget(),
-          ),),
+          ),
+        ),
       ),
       body: Consumer<ChatNotifier>(
         builder: (context, chatNotifier, child) {
-        // first time call so that get data from backend to List
+          // first time call so that get data from backend to List
           chatNotifier.getChats();
-        return FutureBuilder<List<GetChats>>(
-            future: chatNotifier.chats, // access List which get data backend from before
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error is: ${snapshot.error}'),
-              );
-            }
-            else if(snapshot.data!.isEmpty)
-              {
-                return SearchLoading(text: "No Chat's Available");
-              }
-            else{
-              var chats = snapshot.data;
-              // print(chats?[0].chatName);
-              // print(chats?[0].isGroupChat);
-              return ListView.builder(
-                itemCount: chats?.length,
-                itemBuilder: (context, index) {
-                return Container(
-                  height: size.height*0.26,
-                  width: size.width,
-                  color: Colors.orange,
+          chatNotifier.getPrefs();
+          print(chatNotifier.userId);
+          return FutureBuilder<List<GetChats>>(
+            future: chatNotifier
+                .chats, // access List which get data backend from before
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
                 );
-              },);
-            }
-          },
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error is: ${snapshot.error}'),
+                );
+              } else if (snapshot.data!.isEmpty) {
+                return SearchLoading(text: "No Chat's Available");
+              } else {
+                var chats = snapshot.data;
+                // print(chats?[0].chatName);
+                // print(chats?[0].isGroupChat);
+                return ListView.builder(
+                  itemCount: chats?.length,
+                  itemBuilder: (context, index) {
+                    final chat = chats?[index];
+                    //     (user) => user.id != chatNotifier.userId:
+                    // This lambda function takes each user from the list and checks if their id is not equal to the userId stored in chatNotifier.
+                    // In simple terms, it keeps only the users whose id is different from chatNotifier.userId.
+                    var user = chat?.users
+                        .where((user) => user.id != chatNotifier.userId).toList(); //be careful to use toList() otherwise bad state error get
+
+                    // print(">>>");
+                    // print(user!.length);
+                    // if (user != null && user.isNotEmpty) {
+                    //   print(user.first.username);
+                    //   print(user.first.profile);
+                    // } else {
+                    //   print("No valid users found.");
+                    // }
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: GestureDetector(
+                        //can click each chat list
+                        onTap: () {},
+                        child: Container(
+                          height: size.height * 0.1,
+                          width: size.width,
+                          decoration: BoxDecoration(
+                              color: Colors.blueGrey,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 4),
+                            minLeadingWidth: 0,
+                            minVerticalPadding: 0,
+                            leading: CircleAvatar(
+                              radius: 30,
+                              backgroundImage: user?.isNotEmpty == true
+                                  ? NetworkImage(user!.first.profile)
+                                  : AssetImage('assets/images/profile.jpg') as ImageProvider,  // user na pele by default amar profile picture ta show korbe
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+            },
           );
-      },),
+        },
+      ),
     );
   }
 }
