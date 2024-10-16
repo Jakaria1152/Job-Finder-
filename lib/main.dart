@@ -1,14 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_finder_app/controllers/bookmark_provider.dart';
-import 'package:job_finder_app/controllers/image_provider.dart';
-import 'package:job_finder_app/controllers/job_provider.dart';
-import 'package:job_finder_app/controllers/login_provider.dart';
-import 'package:job_finder_app/controllers/profile_provider.dart';
-import 'package:job_finder_app/controllers/zoom_notifier.dart';
 import 'package:job_finder_app/views/ui/auth/login_page.dart';
-import 'package:job_finder_app/views/ui/auth/update_user.dart';
+import 'package:job_finder_app/controllers/exports.dart';  // this is use very reduce large amount import
 import 'package:job_finder_app/views/ui/mainScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,6 +37,7 @@ void main()async{
       ChangeNotifierProvider(create: (context) => ProfileNotifier(),),
       ChangeNotifierProvider(create: (context) => JobNotifier(),),
       ChangeNotifierProvider(create: (context) => BookMarkNotifier(),),
+      ChangeNotifierProvider(create: (context) => ChatNotifier(),),
     ],child: myApp(),)
   );
 }
