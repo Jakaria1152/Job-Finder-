@@ -239,6 +239,8 @@ result =
                       final msgList = snapshot.data;
                       messages = messages + msgList!;
                       return ListView.builder(
+                        // very useful for chat application
+                        reverse: true, // if miss this message format like opposite
                         controller: _scrollController,
                         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                         itemCount: messages.length,
