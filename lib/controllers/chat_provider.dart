@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/response/Chat/get_chat.dart';
@@ -16,4 +17,19 @@ getPrefs()async{
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   userId = prefs.getString("userId");
 }
+
+  String msgTime(String timestamp){
+    DateTime now = DateTime.now();  // get current date Time
+    DateTime messageTime = DateTime.parse(timestamp);  // covert string dateTime to DateTime Format
+
+    if(now.year == messageTime.year &&
+    now.month == messageTime.month &&
+    now.day == messageTime.day)
+      {
+        return (DateFormat.Hm()).toString();
+      }
+
+    return "";
+
+  }
 }

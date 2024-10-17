@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/controllers/chat_provider.dart';
 import 'package:job_finder_app/model/response/Chat/get_chat.dart';
+import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/common/search_loader.dart';
 import 'package:provider/provider.dart';
 
@@ -50,6 +51,7 @@ class ChatsList extends StatelessWidget {
                 // print(chats?[0].chatName);
                 // print(chats?[0].isGroupChat);
                 return ListView.builder(
+                  padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                   itemCount: chats?.length,
                   itemBuilder: (context, index) {
                     final chat = chats?[index];
@@ -88,6 +90,30 @@ class ChatsList extends StatelessWidget {
                                   ? NetworkImage(user!.first.profile)
                                   : AssetImage('assets/images/profile.jpg') as ImageProvider,  // user na pele by default amar profile picture ta show korbe
                             ),
+                            title: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ReusableText(text: user!.first.username,
+                                    style: TextStyle(fontSize: 16,
+                                    color: Colors.black, fontWeight: FontWeight.w600)),
+                                SizedBox(height: 5,),
+                                ReusableText(text: chat?.latestMessage?.content ?? "",
+                                    style: TextStyle(fontSize: 16,
+                                        color: Colors.white.withOpacity(0.6), fontWeight: FontWeight.w600)),
+
+                              ],
+                            ),
+                            trailing: Padding(padding: EdgeInsets.only(right: 4),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ReusableText(text: "",
+                                    style: TextStyle(fontSize: 16,
+                                        color: Colors.black, fontWeight: FontWeight.w600)),
+                              ],
+                            ),),
                           ),
                         ),
                       ),
