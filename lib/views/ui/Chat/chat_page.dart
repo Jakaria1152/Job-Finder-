@@ -4,6 +4,7 @@ import 'package:get/get_common/get_reset.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:job_finder_app/controllers/chat_provider.dart';
 import 'package:job_finder_app/model/response/Messaging/messaging_res.dart';
+import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/helper/messaging_helper.dart';
@@ -92,14 +93,21 @@ return SafeArea(child: Padding(
             } else if (snapshot.data!.isEmpty) {
               return SearchLoading(text: "You do not have message");
             }else{
-              var chats = snapshot.data;
+              final chats = snapshot.data;
               return ListView.builder(
                 padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                 itemCount: chats?.length,
                 itemBuilder: (context, index) {
                   final chat = chats?[index];
 
-                  return Container();
+                  return Padding(padding: EdgeInsets.only(top: 8, bottom: 12),
+                  child: Column(
+                    children: [
+                      ReusableText(text: chatNotifier.msgTime(chat!.updatedAt.toString()),
+                          style: TextStyle(fontSize: 36, color: Colors.black, fontWeight: FontWeight.normal))
+                    ],
+                  ),
+                  );
                 },
               );
             }

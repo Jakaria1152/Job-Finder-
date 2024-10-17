@@ -60,8 +60,9 @@ class MessagingHelper{
       "x-auth-token": '$token'  // this is x-auth-token same as backend req.header("x-auth-token");
     };
     try{
+      //http://localhost:8080/?year=2024&month=march
       response = await http.get(
-          Uri.parse('${Config.apiUrl}${Config.messagingUrl}/$chatId{"page: ${offset.toString()}"}'),
+          Uri.parse('${Config.apiUrl}${Config.messagingUrl}/$chatId?page=${offset.toString()}'),  // be careful for sent query ?page = value
           headers: requestHeaders,
       )
       ;
