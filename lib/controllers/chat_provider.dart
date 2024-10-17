@@ -7,6 +7,13 @@ import '../services/helper/chat_helper.dart';
 
 class ChatNotifier extends ChangeNotifier{
 late Future<List<GetChats>> chats;
+List<String> _online = [];
+List<String> get online => _online;
+set onlineUsers(List<String> newList)
+{
+  _online = newList;
+  notifyListeners();
+}
 String? userId;  // this id match chat users userId to find current user
 getChats()
   {
@@ -16,6 +23,15 @@ getChats()
 getPrefs()async{
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   userId = prefs.getString("userId");
+}
+
+// check user typing or not
+  bool _typing = false;
+bool get typing => _typing;
+set typingStatus(bool newState)
+{
+  _typing = newState;
+  notifyListeners();
 }
 
   String msgTime(String timestamp){
@@ -37,8 +53,12 @@ getPrefs()async{
     else{
       return DateFormat.yMd().format(messageTime); // year month date format
     }
-
-
-
   }
+
+// String showTimeAgo(String timeStamp) {
+//   DateTime messageTime = DateTime.parse(timeStamp);
+//   String timeAgo = timeago.format(messageTime);
+//
+//   return timeAgo;
+// }
 }

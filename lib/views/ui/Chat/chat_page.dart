@@ -51,6 +51,33 @@ class _ChatPageState extends State<ChatPage> {
     socket!.onConnect((_)
     {
       print('Connect to Backend Successfully>>>');
+      // check user online or not
+      socket?.on('online-user', (userId)
+      {
+        // Removes the objects in the range from start to end, then inserts the elements of replacements at start.
+        // final numbers = <int>[1, 2, 3, 4, 5];
+        // final replacements = [6, 7];
+        // numbers.replaceRange(1, 4, replacements);
+        // print(numbers); // [1, 6, 7, 5]
+        // alltime replace userId List
+            chatNotifier.online.replaceRange(0, chatNotifier.online.length,
+                [userId]);
+      });
+      // check user typing or not
+      socket!.on('typing', (status){  // be careful typing(event) name same as backend otherwise get error
+        chatNotifier.typingStatus = true; // change state for user typing
+      });
+
+      // check user typing stop
+      socket!.on('stop typing', (status){
+        chatNotifier.typingStatus = false; // change state for user typing
+      });
+
+      // check user new message received
+      socket!.on('new message', (newMessageReceived){
+
+      });
+      
     });
   }
 
