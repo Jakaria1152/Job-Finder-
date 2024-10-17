@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
-import 'package:get/get_common/get_reset.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:job_finder_app/controllers/chat_provider.dart';
 import 'package:job_finder_app/model/response/Messaging/messaging_res.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/Chat/widget/chat_textfield.dart';
 import 'package:provider/provider.dart';
-
+import 'package:socket_io_client/socket_io_client.dart' as IO;  // see carefully
 import '../../../services/helper/messaging_helper.dart';
 import '../../common/app_bar.dart';
 import '../../common/search_loader.dart';
@@ -32,10 +30,28 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   TextEditingController messageController = TextEditingController();
   int offset = 1;
+  IO.Socket? socket;
   late Future<List<ReceivedMessages>> msgList;
   // get message
   void getMessages() {
     msgList = MessagingHelper.getMessages(widget.id, offset);
+  }
+  // get connection via socket
+  void connect(){
+    // make another controller object for chatNotifier
+    var chatNotifier = Provider.of<ChatNotifier>(context,listen: false);
+    socket = IO.io('https://job-finderapp-backend-production.up.railway.app',
+    <String, dynamic>{
+      "transports": ['websocket'],
+      "autoConnect": false
+    }
+    );
+    socket?.emit('setup', chatNotifier.userId );
+    socket!.connect();
+    socket!.onConnect((_)
+    {
+      print('Connect to Backend Successfully>>>');
+    });
   }
 
   @override
@@ -43,6 +59,7 @@ class _ChatPageState extends State<ChatPage> {
     // TODO: implement initState
     super.initState();
     getMessages(); // call get Message
+    connect();  // socket connect call; which is useful for real time data update
   }
 
   @override
