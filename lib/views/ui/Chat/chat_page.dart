@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:job_finder_app/controllers/chat_provider.dart';
 import 'package:job_finder_app/model/response/Messaging/messaging_res.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
+import 'package:job_finder_app/views/ui/Chat/widget/chat_textfield.dart';
 import 'package:provider/provider.dart';
 
 import '../../../services/helper/messaging_helper.dart';
@@ -29,6 +30,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  TextEditingController messageController = TextEditingController();
   int offset = 1;
   late Future<List<ReceivedMessages>> msgList;
   // get message
@@ -162,10 +164,11 @@ class _ChatPageState extends State<ChatPage> {
                   },
                 )
                 ),
-                Container(
-                  padding: EdgeInsets.all(12),
-                  alignment: Alignment.bottomCenter,
-                )
+                // make sender send message box
+                MessageTextField(
+                  messageController: messageController,
+                  suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.send,size: 24,
+                    color: Colors.lightBlue,)),)
               ],
             ),
           ));
@@ -174,3 +177,5 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 }
+
+
