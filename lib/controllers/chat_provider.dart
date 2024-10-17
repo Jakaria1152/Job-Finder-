@@ -26,10 +26,19 @@ getPrefs()async{
     now.month == messageTime.month &&
     now.day == messageTime.day)
       {
-        return (DateFormat.Hm()).toString();
+        return DateFormat.Hm().format(messageTime);  // same date er message hole hour monutes e dekhabe
       }
+    else if(now.year == messageTime.year &&
+        now.month == messageTime.month &&
+        now.day - messageTime.day == 1)  // today 17(now.day) - 16 = 1 **get yesterday
+    {
+        return "Yesterday";
+    }
+    else{
+      return DateFormat.yMd().format(messageTime); // year month date format
+    }
 
-    return "";
+
 
   }
 }
