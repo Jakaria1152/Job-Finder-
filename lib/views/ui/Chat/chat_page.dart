@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/controllers/chat_provider.dart';
+import 'package:job_finder_app/model/request/Message/send_message.dart';
 import 'package:job_finder_app/model/response/Messaging/messaging_res.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/Chat/widget/chat_textfield.dart';
 import 'package:provider/provider.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;  // see carefully
+import 'package:socket_io_client/socket_io_client.dart' as IO; // see carefully
 import '../../../services/helper/messaging_helper.dart';
 import '../../common/app_bar.dart';
 import '../../common/search_loader.dart';
@@ -16,6 +17,7 @@ class ChatPage extends StatefulWidget {
   final String id;
   final String profile;
   final List<String> user;
+
   const ChatPage(
       {super.key,
       required this.title,
@@ -32,53 +34,98 @@ class _ChatPageState extends State<ChatPage> {
   int offset = 1;
   IO.Socket? socket;
   late Future<List<ReceivedMessages>> msgList;
+  List<ReceivedMessages> messages = [];
+  String receiver = '';
+  final ScrollController _scrollController = ScrollController(); // very useful
   // get message
   void getMessages() {
     msgList = MessagingHelper.getMessages(widget.id, offset);
   }
+
   // get connection via socket
-  void connect(){
+  void connect() {
     // make another controller object for chatNotifier
-    var chatNotifier = Provider.of<ChatNotifier>(context,listen: false);
-    socket = IO.io('https://job-finderapp-backend-production.up.railway.app',
-    <String, dynamic>{
-      "transports": ['websocket'],
-      "autoConnect": false
-    }
-    );
-    socket?.emit('setup', chatNotifier.userId );
+    var chatNotifier = Provider.of<ChatNotifier>(context, listen: false);
+    socket = IO.io(
+        'https://job-finderapp-backend-production.up.railway.app',
+        <String, dynamic>{
+          "transports": ['websocket'],
+          "autoConnect": false
+        });
+    socket?.emit('setup', chatNotifier.userId);
     socket!.connect();
-    socket!.onConnect((_)
-    {
+    socket!.onConnect((_) {
       print('Connect to Backend Successfully>>>');
       // check user online or not
-      socket?.on('online-user', (userId)
-      {
+      socket?.on('online-user', (userId) {
         // Removes the objects in the range from start to end, then inserts the elements of replacements at start.
         // final numbers = <int>[1, 2, 3, 4, 5];
         // final replacements = [6, 7];
         // numbers.replaceRange(1, 4, replacements);
         // print(numbers); // [1, 6, 7, 5]
         // alltime replace userId List
-            chatNotifier.online.replaceRange(0, chatNotifier.online.length,
-                [userId]);
+        chatNotifier.online
+            .replaceRange(0, chatNotifier.online.length, [userId]);
       });
       // check user typing or not
-      socket!.on('typing', (status){  // be careful typing(event) name same as backend otherwise get error
+      socket!.on('typing', (status) {
+        // be careful typing(event) name same as backend otherwise get error
         chatNotifier.typingStatus = true; // change state for user typing
       });
 
       // check user typing stop
-      socket!.on('stop typing', (status){
+      socket!.on('stop typing', (status) {
         chatNotifier.typingStatus = false; // change state for user typing
       });
 
       // check user new message received
-      socket!.on('new message', (newMessageReceived){
+      socket!.on('new message', (newMessageReceived) {
+        sendStopTypingEvent(widget.id);
+        ReceivedMessages receivedMessages =
+            ReceivedMessages.fromJson(newMessageReceived);
 
+        if (receivedMessages.sender.id != chatNotifier.userId) {
+          setState(() {
+            // Inserts element at position index in this list.
+            // This increases the length of the list by one and shifts all objects at or after the index towards the end of the list.
+            // The list must be growable. The index value must be non-negative and no greater than length.
+            // final numbers = <int>[1, 2, 3, 4];
+            // const index = 2;
+            // numbers.insert(index, 10);
+            // print(numbers); // [1, 2, 10, 3, 4]
+            // current received message all time 0 index er dike thakbe
+            messages.insert(0, receivedMessages);
+          });
+        }
       });
-      
     });
+  }
+
+  void sendMessage(String content, String chatId, String receiver) {
+    SendMessage model =
+        SendMessage(content: content, chatId: chatId, receiver: receiver);
+    MessagingHelper.sendMessage(model).then((response) {
+      // return [true, receivedMessage, responseMap];      --
+      var emission = response[2]; // responseMap
+      socket!.emit('new message', emission);
+      sendStopTypingEvent(widget.id);
+      setState(() {
+        messageController.clear();
+        messages.insert(0, response[1]); //receivedMessage--
+      });
+    });
+  }
+
+  void sendTypingEvent(String status) {
+    socket!.emit('typing', status);
+  }
+
+  void sendStopTypingEvent(String status) {
+    socket!.emit('stop typing', status);
+  }
+
+  void joinChat() {
+    socket!.emit('join chat', widget.id);
   }
 
   @override
@@ -86,7 +133,8 @@ class _ChatPageState extends State<ChatPage> {
     // TODO: implement initState
     super.initState();
     getMessages(); // call get Message
-    connect();  // socket connect call; which is useful for real time data update
+    connect(); // socket connect call; which is useful for real time data update
+    joinChat();
   }
 
   @override
@@ -94,43 +142,59 @@ class _ChatPageState extends State<ChatPage> {
     // device width and height
     final width = Get.width;
     final height = Get.height;
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50),
-        child: CustomAppbar(
-          text: widget.title,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: GestureDetector(
-              onTap: () {
-                Get.back(); // back previous page
-              },
-              child: Icon(Icons.arrow_back),
+    return Consumer<ChatNotifier>(
+        builder: (context, chatNotifier, child) {
+      /*
+          The first element that satisfies the given predicate test.
+Iterates through elements and returns the first to satisfy test.
+
+final numbers = <int>[1, 2, 3, 5, 6, 7];
+var result = numbers.firstWhere((element) => element < 5); // 1
+result = numbers.firstWhere((element) => element > 5); // 6
+result =
+    numbers.firstWhere((element) => element > 10, orElse: () => -1); // -1
+           */
+      // prothom theke check korbe je id userid er sathe equal hobe na seita return kore stop hoye jabe
+      receiver = widget.user.firstWhere((id) => id != chatNotifier.userId);
+      // print('receiver is: $receiver');
+      // print('userId: ${chatNotifier.userId}');
+      return Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(50),
+            child: CustomAppbar(
+              text: !chatNotifier.typing ? widget.title: "typing....",
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.back(); // back previous page
+                  },
+                  child: Icon(Icons.arrow_back),
+                ),
+              ),
+              actions: [
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Stack(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(widget.profile),
+                      ),
+                      Positioned(
+                          right: 3,
+                          child: CircleAvatar(
+                            radius: 5,
+                            // online list er vitore all active user er list thakbe oitar vitor theke receiver er id thale active dekhabe(green)
+                            backgroundColor: chatNotifier.online.contains(receiver) ?
+                            Colors.green: Colors.grey,
+                          ))
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.all(8),
-              child: Stack(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(widget.profile),
-                  ),
-                  Positioned(
-                      right: 3,
-                      child: CircleAvatar(
-                        radius: 5,
-                        backgroundColor: Colors.green,
-                      ))
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-      body: Consumer<ChatNotifier>(
-        builder: (context, chatNotifier, child) {
-          return SafeArea(
+          body: SafeArea(
               child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12),
             child: Column(
@@ -153,6 +217,7 @@ class _ChatPageState extends State<ChatPage> {
                     } else {
                       final chats = snapshot.data;
                       return ListView.builder(
+                        controller: _scrollController,
                         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                         itemCount: chats?.length,
                         itemBuilder: (context, index) {
@@ -206,20 +271,26 @@ class _ChatPageState extends State<ChatPage> {
                       );
                     }
                   },
-                )
-                ),
+                )),
                 // make sender send message box
                 MessageTextField(
                   messageController: messageController,
-                  suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.send,size: 24,
-                    color: Colors.lightBlue,)),)
+                  suffixIcon: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.send,
+                        size: 24,
+                        color: Colors.lightBlue,
+                      )),
+                )
               ],
             ),
-          ));
-        },
-      ),
-    );
+          )));
+    });
   }
 }
+/*
+{
 
-
+        },
+ */
