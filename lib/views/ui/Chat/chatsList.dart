@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:job_finder_app/controllers/chat_provider.dart';
 import 'package:job_finder_app/model/response/Chat/get_chat.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
@@ -78,7 +79,7 @@ class ChatsList extends StatelessWidget {
                           height: size.height * 0.1,
                           width: size.width,
                           decoration: BoxDecoration(
-                              color: Colors.blueGrey,
+                              color: Colors.grey.withOpacity(0.7),
                               borderRadius: BorderRadius.circular(12)),
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(horizontal: 4),
@@ -100,7 +101,7 @@ class ChatsList extends StatelessWidget {
                                 SizedBox(height: 5,),
                                 ReusableText(text: chat?.latestMessage?.content ?? "",
                                     style: TextStyle(fontSize: 16,
-                                        color: Colors.white.withOpacity(0.6), fontWeight: FontWeight.w600)),
+                                        color: Colors.blueGrey, fontWeight: FontWeight.w600)),
 
                               ],
                             ),
@@ -109,9 +110,15 @@ class ChatsList extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ReusableText(text: "",
-                                    style: TextStyle(fontSize: 16,
-                                        color: Colors.black, fontWeight: FontWeight.w600)),
+                                // message updated time show korbe
+                                ReusableText(text: chatNotifier.msgTime(chat!.updatedAt.toString()),
+                                    style: TextStyle(fontSize: 12,
+                                        color: Colors.black, fontWeight: FontWeight.normal)),
+                                
+                                Icon(  // icon show based on incoming or outgoing
+                                    chat.chatName == chatNotifier.userId ?
+                                    Ionicons.arrow_forward_circle_outline:
+                                    Ionicons.arrow_back_circle_outline)
                               ],
                             ),),
                           ),
