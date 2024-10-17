@@ -24,12 +24,12 @@ class MessagingHelper{
       response = await http.post(
           Uri.parse('${Config.apiUrl}${Config.messagingUrl}'),
           headers: requestHeaders,
-          body: model.toJson()
+          body: jsonEncode(model.toJson())  // be careful to jsonEncode i get lot time error
       )
       ;
     }catch(e)
     {
-      print('BookMark Add api call error: $e');
+      print('Send Message api call error: $e');
     }
 
     if(response!.statusCode == 200)

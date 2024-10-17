@@ -37,8 +37,28 @@ class _ChatPageState extends State<ChatPage> {
   List<ReceivedMessages> messages = [];
   String receiver = '';
   final ScrollController _scrollController = ScrollController(); // very useful
+
+  void handleNext(){
+    _scrollController.addListener(()async{
+      if(_scrollController.hasClients)
+        {
+          if(_scrollController.position.maxScrollExtent ==
+          _scrollController.position.pixels)
+            {
+              print('<<><><><Loading><><><>>');
+              if(messages.length >= 12)
+                {
+                  getMessages(offset++);
+                  setState(() {
+
+                  });
+                }
+            }
+        }
+    });
+  }
   // get message
-  void getMessages() {
+  void getMessages(int offset) {
     msgList = MessagingHelper.getMessages(widget.id, offset);
   }
 
@@ -132,9 +152,10 @@ class _ChatPageState extends State<ChatPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getMessages(); // call get Message
+    getMessages(offset); // call get Message
     connect(); // socket connect call; which is useful for real time data update
     joinChat();
+    handleNext(); // show 12 message per page and also scroll feature
   }
 
   @override
@@ -215,13 +236,14 @@ result =
                     } else if (snapshot.data!.isEmpty) {
                       return SearchLoading(text: "You do not have message");
                     } else {
-                      final chats = snapshot.data;
+                      final msgList = snapshot.data;
+                      messages = messages + msgList!;
                       return ListView.builder(
                         controller: _scrollController,
                         padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                        itemCount: chats?.length,
+                        itemCount: messages.length,
                         itemBuilder: (context, index) {
-                          final data = chats?[index];
+                          final data = messages[index];
 
                           return Padding(
                             padding: EdgeInsets.only(top: 8, bottom: 12),
@@ -276,12 +298,31 @@ result =
                 MessageTextField(
                   messageController: messageController,
                   suffixIcon: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        String msg = messageController.text;
+                        // message send function call
+                        sendMessage(msg, widget.id, receiver);
+                      },
                       icon: Icon(
                         Icons.send,
                         size: 24,
                         color: Colors.lightBlue,
                       )),
+                  onChanged: (_) {
+                    sendTypingEvent(widget.id);
+                  },
+                  onEditingComplete: (){
+                    String msg = messageController.text;
+                    // message send function call
+                    sendMessage(msg, widget.id, receiver);
+                  },
+                  onTapOutside: (_){
+                    sendStopTypingEvent(widget.id);
+                  },
+                  onSubmitted: (_){
+                    String msg = messageController.text;
+                    sendMessage(msg, widget.id, receiver);
+                  },
                 )
               ],
             ),
