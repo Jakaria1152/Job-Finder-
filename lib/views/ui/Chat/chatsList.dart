@@ -5,6 +5,7 @@ import 'package:job_finder_app/controllers/chat_provider.dart';
 import 'package:job_finder_app/model/response/Chat/get_chat.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/common/search_loader.dart';
+import 'package:job_finder_app/views/ui/Chat/chat_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/app_bar.dart';
@@ -74,7 +75,16 @@ class ChatsList extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: GestureDetector(
                         //can click each chat list
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(()=>ChatPage(id: chat.id,
+                          title: user.first.username,
+                            profile: user.first.profile,
+                            user: [
+                              chat.users[0].id,
+                              chat.users[1].id,
+                            ],
+                          ));
+                        },
                         child: Container(
                           height: size.height * 0.1,
                           width: size.width,
