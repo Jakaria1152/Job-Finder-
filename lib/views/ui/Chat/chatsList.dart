@@ -126,7 +126,7 @@ class ChatsList extends StatelessWidget {
                                         color: Colors.black, fontWeight: FontWeight.normal)),
                                 
                                 Icon(  // icon show based on incoming or outgoing
-                                    chat.chatName == chatNotifier.userId ?
+                                    chat.latestMessage?.sender.id == user.first.id ?
                                     Ionicons.arrow_forward_circle_outline:
                                     Ionicons.arrow_back_circle_outline)
                               ],

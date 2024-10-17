@@ -6,6 +6,7 @@ import 'package:job_finder_app/model/request/Message/send_message.dart';
 import 'package:job_finder_app/model/response/Messaging/messaging_res.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/Chat/widget/chat_textfield.dart';
+import 'package:job_finder_app/views/ui/mainScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO; // see carefully
 import '../../../services/helper/messaging_helper.dart';
@@ -188,7 +189,9 @@ result =
                 padding: const EdgeInsets.all(12.0),
                 child: GestureDetector(
                   onTap: () {
-                    Get.back(); // back previous page
+                    // this method not work to show updated message
+                    // Get.back(); // back previous page
+                    Get.to(()=>const MainScreen()); // show updated message in subtitle chatlist
                   },
                   child: Icon(Icons.arrow_back),
                 ),
