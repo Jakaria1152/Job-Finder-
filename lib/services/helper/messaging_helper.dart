@@ -61,7 +61,7 @@ class MessagingHelper{
     };
     try{
       response = await http.get(
-          Uri.parse('${Config.apiUrl}${Config.messagingUrl}/$chatId'),
+          Uri.parse('${Config.apiUrl}${Config.messagingUrl}/$chatId{"page: ${offset.toString()}"}'),
           headers: requestHeaders,
       )
       ;
