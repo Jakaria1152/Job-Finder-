@@ -18,7 +18,7 @@ class CustomField extends StatelessWidget {
         suffixIcon: suffixIcon,
           border: InputBorder.none,
           hintText: hintText.toUpperCase(),
-          hintStyle: TextStyle(color: Colors.white, fontSize: 20, )
+          hintStyle: const TextStyle(color: Colors.white, fontSize: 20, )
       ),
 
 

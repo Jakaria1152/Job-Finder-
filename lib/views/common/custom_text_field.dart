@@ -20,20 +20,20 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           suffixIcon: suffixIcon,
-          hintStyle: TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w500),
-          errorBorder: OutlineInputBorder(
+          hintStyle: const TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w500),
+          errorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.zero,
             borderSide: BorderSide(color: Colors.red,width: 0.5)
           ),
-            focusedErrorBorder: OutlineInputBorder(
+            focusedErrorBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.zero,
                 borderSide: BorderSide(color: Colors.transparent,width: 0)
             ),
-            disabledBorder: OutlineInputBorder(
+            disabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.zero,
                 borderSide: BorderSide(color: Colors.grey,width: 0.5)
             ),
-            enabledBorder: OutlineInputBorder(
+            enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.zero,
                 borderSide: BorderSide(color: Colors.transparent,width: 0.5)
             ),
@@ -43,7 +43,7 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         cursorHeight: 25,
 
-        style: TextStyle(fontSize: 14,color: Colors.black, fontWeight: FontWeight.w500),
+        style: const TextStyle(fontSize: 14,color: Colors.black, fontWeight: FontWeight.w500),
         validator: validator,
       ),
     );

@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 
-import '../../constants/constant.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;

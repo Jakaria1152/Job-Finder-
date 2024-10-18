@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:job_finder_app/constants/constant.dart';
 import 'package:job_finder_app/controllers/profile_provider.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/auth/profile_update.dart';
@@ -17,12 +16,12 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: CustomAppbar(
           text: 'Profile',
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(12.0),
             child: DrawerWidget(),
           ),
         ),
@@ -35,7 +34,7 @@ class ProfilePage extends StatelessWidget {
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting)
             {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -60,14 +59,14 @@ class ProfilePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                           child: Image.network(
                             userData!.profile,
                             width: 80,
                             height: 100,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Column(
@@ -75,23 +74,23 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ReusableText(
-                                text: userData!.username,
-                                style: TextStyle(
+                                text: userData.username,
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600)),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.location_pin,
                                   color: Colors.black,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 ReusableText(
                                     text: userData.location,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600)),
@@ -103,7 +102,7 @@ class ProfilePage extends StatelessWidget {
                           onTap: () {
                             Get.to(ProfileUpdate(profile: userData,));
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.edit_calendar_outlined,
                             size: 18,
                           ),
@@ -111,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Stack(
@@ -124,17 +123,17 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(left: 12),
+                              margin: const EdgeInsets.only(left: 12),
                               width: 60,
                               height: 70,
                               color: Colors.white,
-                              child: Icon(
+                              child: const Icon(
                                 FontAwesomeIcons.filePdf,
                                 color: Colors.red,
                                 size: 40,
                               ),
                             ),
-                            Column(
+                            const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -152,7 +151,7 @@ class ProfilePage extends StatelessWidget {
                                         fontWeight: FontWeight.w500)),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 1,
                             ) // when use this text get to the center
                           ],
@@ -163,7 +162,7 @@ class ProfilePage extends StatelessWidget {
                           right: 5,
                           child: GestureDetector(
                             onTap: () {},
-                            child: ReusableText(
+                            child: const ReusableText(
                               text: "Edit",
                               style: TextStyle(
                                   color: Colors.deepOrange,
@@ -173,22 +172,22 @@ class ProfilePage extends StatelessWidget {
                           ))
                     ],
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   Container(
-                    padding: EdgeInsets.only(left: 8),
+                    padding: const EdgeInsets.only(left: 8),
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height*0.06,
                     color: Colors.grey.withOpacity(0.3),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: ReusableText(text: userData.email,style: TextStyle(
+                      child: ReusableText(text: userData.email,style: const TextStyle(
                           fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600
                       ),),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   Container(
-                    padding: EdgeInsets.only(left: 8),
+                    padding: const EdgeInsets.only(left: 8),
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height*0.06,
                     color: Colors.grey.withOpacity(0.3),
@@ -197,42 +196,42 @@ class ProfilePage extends StatelessWidget {
                       child: Row(
                         children: [
                           SvgPicture.asset("assets/icon/Flag_of_Bangladesh.svg",height: 20,width: 20,),
-                          SizedBox(width: 15,),
-                          ReusableText(text: userData.phone??"",style: TextStyle(
+                          const SizedBox(width: 15,),
+                          ReusableText(text: userData.phone??"",style: const TextStyle(
                               fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600
                           ),),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   Container(
                     color: Colors.grey.withOpacity(0.3),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: ReusableText(text: 'Skills', style: TextStyle(
                               fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600
                           )),
                         ),
-                        SizedBox(height: 3,),
+                        const SizedBox(height: 3,),
                         SizedBox(height: MediaQuery.of(context).size.height*0.35,
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                             child: ListView.builder(
-                              physics: AlwaysScrollableScrollPhysics(),
+                              physics: const AlwaysScrollableScrollPhysics(),
                               itemCount: userData.skills.length,
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(horizontal: 10),
                                     width: double.infinity,
                                     height: MediaQuery.of(context).size.height*0.06,
                                     color: Colors.white,
-                                    child: ReusableText(text:userData.skills[index],style: TextStyle(
+                                    child: ReusableText(text:userData.skills[index],style: const TextStyle(
                                         fontWeight: FontWeight.normal,
                                         color: Colors.black,
                                         fontSize: 16

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder_app/model/response/job/jobs_response.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 
 class VerticalTileBookMark extends StatelessWidget {
@@ -13,7 +12,7 @@ class VerticalTileBookMark extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
         height: MediaQuery.of(context).size.height*0.18,
         width: double.infinity,
         color: Colors.blueGrey,
@@ -29,16 +28,16 @@ class VerticalTileBookMark extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ReusableText(text: job.toString(), style: TextStyle(
+                    ReusableText(text: job.toString(), style: const TextStyle(
                         fontSize: 20,color: Colors.black, fontWeight: FontWeight.w600
                     )),
                     SizedBox(width: MediaQuery.of(context).size.width*0.5,
-                      child:ReusableText(text: user.toString(), style: TextStyle(
+                      child:ReusableText(text: user.toString(), style: const TextStyle(
                           fontSize: 20,color: Colors.black, fontWeight: FontWeight.w600
                       )) ,)
                   ],
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 18,
                   backgroundColor: Colors.white,
                   child: Icon(Icons.chevron_right),

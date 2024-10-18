@@ -27,7 +27,7 @@ try{
       headers: requestHeaders);
 }catch(e)
   {
-    print('login api call error: $e');
+    //print('login api call error: $e');
   }
 
   if(response!.statusCode == 200)
@@ -72,9 +72,9 @@ var responseBody = jsonDecode(response.body);
           headers: requestHeaders);
     }catch(e)
     {
-      print('login api call error: $e');
+      //print('login api call error: $e');
     }
-print(response?.statusCode);
+//print(response?.statusCode);
     if(response!.statusCode == 201)
     {
       return true;
@@ -109,16 +109,16 @@ static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
         headers: requestHeaders);
   }catch(e)
   {
-    print('update profile api call error: $e');
+    //print('update profile api call error: $e');
   }
 
   if(response!.statusCode == 200)
   {
-    print('response coed is: ${response.statusCode}');
+    //print('response coed is: ${response.statusCode}');
     return true;
   }
   else{
-    print('response code is: ${response.statusCode}');
+    //print('response code is: ${response.statusCode}');
     return false;
   }
 
@@ -140,7 +140,7 @@ static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
                headers: requestHeaders);
     }catch(e)
     {
-      print('update profile api call error: $e');
+      //print('update profile api call error: $e');
     }
 
     if(response!.statusCode == 200)
@@ -148,13 +148,10 @@ static Future<bool> updateProfile(ProfileUpdateModel model, String userId)async{
      //  var data = jsonDecode(response.body);
      // print(data);
 
-      var profile;
-    try{
+      ProfileResponse profile;
+
       profile = profileResponseFromJson(response.body);
-    }catch(e)
-    {
-      print('error is $e');
-    }
+
 
       return profile;
     }

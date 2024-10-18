@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
@@ -17,7 +16,7 @@ class SearchWidget extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width*0.84,
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(Icons.search,color: Colors.deepOrange, size: 20,),
                     SizedBox(width: 20,),
@@ -27,11 +26,11 @@ class SearchWidget extends StatelessWidget {
                   ],
                 ),
               ),
-Icon(FontAwesomeIcons.sliders,color: Colors.blueGrey,size: 20,)
+const Icon(FontAwesomeIcons.sliders,color: Colors.blueGrey,size: 20,)
             ],
           ),
-          SizedBox(height: 7,),
-          Divider(
+          const SizedBox(height: 7,),
+          const Divider(
             color: Colors.blueGrey,
             thickness: 0.5,
             endIndent: 40,

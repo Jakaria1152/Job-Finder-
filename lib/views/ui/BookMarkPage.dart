@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:job_finder_app/controllers/bookmark_provider.dart';
 import 'package:job_finder_app/controllers/job_provider.dart';
-import 'package:job_finder_app/model/response/Bookmark/all_bookmark.dart';
-import 'package:job_finder_app/views/ui/Jobs/widget/verticalTileBookmark.dart';
 import 'package:provider/provider.dart';
 
-import '../../model/response/job/jobs_response.dart';
 import '../common/VerticalTile.dart';
 import '../common/app_bar.dart';
 import '../common/drawer/drawerWidget.dart';
@@ -20,12 +16,12 @@ class BookMarkPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final jobNotifier = Provider.of<JobNotifier>(context);
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: CustomAppbar(
           text: 'BookMarks',
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(12.0),
             child: DrawerWidget(),
           ),
         ),
@@ -39,7 +35,7 @@ class BookMarkPage extends StatelessWidget {
             future: bookmarkNotifier.bookmarks,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasError) {
@@ -54,7 +50,7 @@ class BookMarkPage extends StatelessWidget {
                         itemCount:
                             bookmarks.length, // total bookmarklist length
                         separatorBuilder: (context, index) {
-                          return SizedBox(
+                          return const SizedBox(
                             height: 10,
                           );
                         },
@@ -75,7 +71,7 @@ class BookMarkPage extends StatelessWidget {
                             ),
                           );
                         })
-                    : Center(
+                    : const Center(
                         child:
                             Text("You haven't already created any bookmark"));
               }

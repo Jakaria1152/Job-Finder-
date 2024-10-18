@@ -11,7 +11,7 @@ class CustomOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(style: OutlinedButton.styleFrom(
       // backgroundColor: color,
-      shape: RoundedRectangleBorder()
+      shape: const RoundedRectangleBorder()
     ),onPressed: onTap, child: Text(text,style: TextStyle(color: color),));
   }
 }

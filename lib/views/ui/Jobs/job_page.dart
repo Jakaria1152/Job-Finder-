@@ -1,9 +1,7 @@
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_finder_app/constants/constant.dart';
 import 'package:job_finder_app/controllers/bookmark_provider.dart';
 import 'package:job_finder_app/controllers/job_provider.dart';
 import 'package:job_finder_app/model/request/Bookmark/bookmark_request.dart';
@@ -39,12 +37,6 @@ class _JobPageState extends State<JobPage> {
             preferredSize: const Size.fromHeight(50),
             child: CustomAppbar(
               text: widget.title,
-              child: GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: const Icon(CupertinoIcons.arrow_left),
-              ),
               actions: [
                 GestureDetector(
                   onTap: () {
@@ -56,13 +48,19 @@ class _JobPageState extends State<JobPage> {
                     }
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(right: 12),
+                    padding: const EdgeInsets.only(right: 12),
                     child: !bookmarkNotifier.jobs.contains(widget.id)
-                        ? Icon(Icons.bookmark_outline)
-                        : Icon(Icons.bookmark),
+                        ? const Icon(Icons.bookmark_outline)
+                        : const Icon(Icons.bookmark),
                   ),
                 )
               ],
+              child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: const Icon(CupertinoIcons.arrow_left),
+              ),
             ),
           ),
           body: FutureBuilder(
@@ -70,7 +68,7 @@ class _JobPageState extends State<JobPage> {
             future: jobNotifier.job,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text('Error is: ${snapshot.error}'),
@@ -142,9 +140,9 @@ class _JobPageState extends State<JobPage> {
                                                   fontSize: 22,
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600)),
-                                          ReusableText(
+                                          const ReusableText(
                                               text: "/monthly",
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   fontSize: 22,
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600)),
@@ -159,9 +157,9 @@ class _JobPageState extends State<JobPage> {
                           const SizedBox(
                             height: 20,
                           ),
-                          ReusableText(
+                          const ReusableText(
                               text: "Job description",
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 22,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600)),
@@ -172,7 +170,7 @@ class _JobPageState extends State<JobPage> {
                             job.description,
                             textAlign: TextAlign.justify,
                             maxLines: 8,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
                                 fontWeight: FontWeight.normal),
@@ -180,9 +178,9 @@ class _JobPageState extends State<JobPage> {
                           const SizedBox(
                             height: 20,
                           ),
-                          ReusableText(
+                          const ReusableText(
                               text: "Requirements",
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 22,
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600)),
@@ -192,7 +190,7 @@ class _JobPageState extends State<JobPage> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.6,
                             child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount:
                                   job.requirements.length, // requirement length
                               itemBuilder: (context, index) {
@@ -204,7 +202,7 @@ class _JobPageState extends State<JobPage> {
                                   '$bullet $req\n',
                                   maxLines: 4,
                                   textAlign: TextAlign.justify,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 16,
                                       color: Colors.grey,
                                       fontWeight: FontWeight.bold),
@@ -245,10 +243,10 @@ class _JobPageState extends State<JobPage> {
                                 }
                             });
                           },
-                          child: Text('Apply Now'),
+                          child: const Text('Apply Now'),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       )
                     ],

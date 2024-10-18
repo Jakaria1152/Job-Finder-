@@ -32,7 +32,7 @@ class JoblistPage extends StatelessWidget {
         future: jobList.jobList,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(
               child: Text('Error is: ${snapshot.error}'),
@@ -41,7 +41,7 @@ class JoblistPage extends StatelessWidget {
             // snapshot data ke job variable er vitore neya hosse
             final jobs = snapshot.data;
             return ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: jobs?.length, // requirement length
               itemBuilder: (context, index) {
                 final job = jobs?[index];  // single requirement

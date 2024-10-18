@@ -18,12 +18,12 @@ class ChatsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = Get.size;
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: CustomAppbar(
           text: 'Chats',
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(12.0),
             child: DrawerWidget(),
           ),
         ),
@@ -39,7 +39,7 @@ class ChatsList extends StatelessWidget {
                 .chats, // access List which get data backend from before
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasError) {
@@ -47,13 +47,13 @@ class ChatsList extends StatelessWidget {
                   child: Text('Error is: ${snapshot.error}'),
                 );
               } else if (snapshot.data!.isEmpty) {
-                return SearchLoading(text: "No Chat's Available");
+                return const SearchLoading(text: "No Chat's Available");
               } else {
                 var chats = snapshot.data;
                 // print(chats?[0].chatName);
                 // print(chats?[0].isGroupChat);
                 return ListView.builder(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                   itemCount: chats?.length,
                   itemBuilder: (context, index) {
                     final chat = chats?[index];
@@ -92,37 +92,37 @@ class ChatsList extends StatelessWidget {
                               color: Colors.grey.withOpacity(0.7),
                               borderRadius: BorderRadius.circular(12)),
                           child: ListTile(
-                            contentPadding: EdgeInsets.symmetric(horizontal: 4),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 4),
                             minLeadingWidth: 0,
                             minVerticalPadding: 0,
                             leading: CircleAvatar(
                               radius: 30,
                               backgroundImage: user?.isNotEmpty == true
                                   ? NetworkImage(user!.first.profile)
-                                  : AssetImage('assets/images/profile.jpg') as ImageProvider,  // user na pele by default amar profile picture ta show korbe
+                                  : const AssetImage('assets/images/profile.jpg') as ImageProvider,  // user na pele by default amar profile picture ta show korbe
                             ),
                             title: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ReusableText(text: user!.first.username,
-                                    style: TextStyle(fontSize: 16,
+                                    style: const TextStyle(fontSize: 16,
                                     color: Colors.black, fontWeight: FontWeight.w600)),
-                                SizedBox(height: 5,),
+                                const SizedBox(height: 5,),
                                 ReusableText(text: chat?.latestMessage?.content ?? "",
-                                    style: TextStyle(fontSize: 16,
+                                    style: const TextStyle(fontSize: 16,
                                         color: Colors.blueGrey, fontWeight: FontWeight.w600)),
 
                               ],
                             ),
-                            trailing: Padding(padding: EdgeInsets.only(right: 4),
+                            trailing: Padding(padding: const EdgeInsets.only(right: 4),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 // message updated time show korbe
                                 ReusableText(text: chatNotifier.showTimeAgo(chat!.updatedAt.toString()),
-                                    style: TextStyle(fontSize: 12,
+                                    style: const TextStyle(fontSize: 12,
                                         color: Colors.black, fontWeight: FontWeight.normal)),
                                 
                                 Icon(  // icon show based on incoming or outgoing

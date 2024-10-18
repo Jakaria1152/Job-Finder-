@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/model/request/profile_update_model.dart';
@@ -93,7 +92,7 @@ class LoginNotifier extends ChangeNotifier{
             Get.snackbar("SignIn Failed", "Please check your credentials",
             colorText: Colors.white,
               backgroundColor: Colors.red,
-              icon: Icon(Icons.add_alert)
+              icon: const Icon(Icons.add_alert)
             );
           }
         });
@@ -115,7 +114,7 @@ class LoginNotifier extends ChangeNotifier{
           icon: const Icon(Icons.add_alert)
         );
         // 3 second delay kore mainscreen a niye jabe
-        Future.delayed(Duration(seconds: 3)).then((value){
+        Future.delayed(const Duration(seconds: 3)).then((value){
           // Get.offAll deya hoese jeno r back na hoi
           Get.offAll(const MainScreen());
         });
@@ -124,7 +123,7 @@ class LoginNotifier extends ChangeNotifier{
         Get.snackbar("Updating Failed", "Please try again",
             colorText: Colors.white,
             backgroundColor: Colors.orange,
-            icon: Icon(Icons.add_alert)
+            icon: const Icon(Icons.add_alert)
         );
       }
     });

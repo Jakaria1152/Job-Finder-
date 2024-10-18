@@ -35,7 +35,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
     // TODO: implement initState
     super.initState();
     phone.text = widget.profile.phone!;
-    location.text = widget.profile.location!;
+    location.text = widget.profile.location;
     skill0.text = widget.profile.skills[0];
     skill1.text = widget.profile.skills[1];
     skill2.text = widget.profile.skills[2];
@@ -58,7 +58,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
   Widget build(BuildContext context) {
     final imageUploader = Provider.of<ImageUploader>(context,listen: true);
     return Scaffold(
-      appBar: PreferredSize(preferredSize: Size.fromHeight(50),
+      appBar: PreferredSize(preferredSize: const Size.fromHeight(50),
           child: CustomAppbar(
               text: 'Update Profile',
               child: GestureDetector(
@@ -72,12 +72,12 @@ Get.back();
           return Form(
             key: loginNotifier.profileFormKey,
             child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 60),
+              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 60),
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ReusableText(text: 'Personal Details', style: TextStyle(fontSize: 35,
+                    const ReusableText(text: 'Personal Details', style: TextStyle(fontSize: 35,
                         color: Colors.black, fontWeight: FontWeight.bold)),
 
                     // image upload na thakle empty hobe tai image pick korbe
@@ -86,7 +86,7 @@ Get.back();
                         // image gallery open hobe
                         imageUploader.pickImage();
                       },
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundColor: Colors.lightBlue,
                         //backgroundImage: ,
                         child: Icon(Icons.photo_filter_rounded),
@@ -109,7 +109,7 @@ Get.back();
                     ),
                   ],
                 ),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Form(child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -122,7 +122,7 @@ Get.back();
                         return null;
                       },
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     CustomTextField(controller: phone, hintText: 'Phone', keyboardType: TextInputType.number,
                       validator: (phone) {
                         if(phone!.isEmpty)
@@ -132,10 +132,10 @@ Get.back();
                         return null;
                       },
                     ),
-                    SizedBox(height: 10,),
-                    ReusableText(text: 'Professional Skills', style: TextStyle(fontSize: 35,
+                    const SizedBox(height: 10,),
+                    const ReusableText(text: 'Professional Skills', style: TextStyle(fontSize: 35,
                         color: Colors.black, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     CustomTextField(controller: skill0, hintText: 'Professional Skills', keyboardType: TextInputType.text,
                       validator: (skill0) {
                         if(skill0!.isEmpty)
@@ -145,7 +145,7 @@ Get.back();
                         return null;
                       },
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     CustomTextField(controller: skill1, hintText: 'Professional Skills', keyboardType: TextInputType.text,
                       validator: (skill1) {
                         if(skill1!.isEmpty)
@@ -155,7 +155,7 @@ Get.back();
                         return null;
                       },
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     CustomTextField(controller: skill2, hintText: 'Professional Skills', keyboardType: TextInputType.text,
                       validator: (skill2) {
                         if(skill2!.isEmpty)
@@ -165,7 +165,7 @@ Get.back();
                         return null;
                       },
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     CustomTextField(controller: skill3, hintText: 'Professional Skills', keyboardType: TextInputType.text,
                       validator: (skill3) {
                         if(skill3!.isEmpty)
@@ -175,7 +175,7 @@ Get.back();
                         return null;
                       },
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     CustomTextField(controller: skill4, hintText: 'Professional Skills', keyboardType: TextInputType.text,
                       validator: (skill4) {
                         if(skill4!.isEmpty)
@@ -185,7 +185,7 @@ Get.back();
                         return null;
                       },
                     ),
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     Consumer<ImageUploader>(builder: (context, imageUploader, child) {
                       return CustomButton(onTap: (){
                         if(imageUploader.imageFil.isEmpty && imageUploader.imageUrl == null)
@@ -193,7 +193,7 @@ Get.back();
                           Get.snackbar("Image Missing", "Please upload an image to proceed",
                               colorText: Colors.white,
                               backgroundColor: Colors.orange,
-                              icon: Icon(Icons.add_alert)
+                              icon: const Icon(Icons.add_alert)
                           );
                         }else
                         {

@@ -19,7 +19,7 @@ class CustomAppbar extends StatelessWidget {
       leading: child,
       actions: actions,
       // text null hole "" assign korbe
-      title: ReusableText(text: text??"", style: TextStyle(color: Colors.black,
+      title: ReusableText(text: text??"", style: const TextStyle(color: Colors.black,
       fontSize: 26,
         fontWeight: FontWeight.w600
       ),),

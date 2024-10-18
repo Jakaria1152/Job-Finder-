@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SearchWidget(
                       onTap: () {
-                        Get.to(SearchPage());
+                        Get.to(const SearchPage());
                       },
                     ),
                     const SizedBox(
@@ -80,10 +80,10 @@ class _HomePageState extends State<HomePage> {
                     HeadingWidget(
                       text: "Popular Jobs",
                       onTap: () {
-                        Get.to(JoblistPage());
+                        Get.to(const JoblistPage());
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     SizedBox(
@@ -122,14 +122,14 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     HeadingWidget(
                       text: "Recently Posted",
                       onTap: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     FutureBuilder(

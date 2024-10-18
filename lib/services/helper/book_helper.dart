@@ -31,7 +31,7 @@ class BookMarkHelper{
 
     if(response!.statusCode == 201)
     {
-      var body = jsonDecode(response!.body);
+      var body = jsonDecode(response.body);
       String bookMarkId = body['_id'];
 
       // print(bookMarkId);

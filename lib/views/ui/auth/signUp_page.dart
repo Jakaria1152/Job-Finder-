@@ -38,7 +38,7 @@ class _signUpPageState extends State<signUpPage> {
       builder: (context, signUpNotifier, child) {
         return Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(50),
+            preferredSize: const Size.fromHeight(50),
             child: CustomAppbar(
               text: 'Sign Up',
               child: GestureDetector(onTap: null, child: Container()
@@ -47,28 +47,28 @@ class _signUpPageState extends State<signUpPage> {
             ),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Form(
               key: signUpNotifier.registerFormKey,
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
-                  ReusableText(
+                  const ReusableText(
                       text: 'Hello, Welcome!',
                       style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w600,
                           color: Colors.black)),
-                  ReusableText(
+                  const ReusableText(
                       text: 'Fill the details to signup to your account',
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: 16,
                           fontWeight: FontWeight.w600)),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   CustomTextField(
@@ -84,7 +84,7 @@ class _signUpPageState extends State<signUpPage> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   CustomTextField(
@@ -101,7 +101,7 @@ class _signUpPageState extends State<signUpPage> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   CustomTextField(
@@ -124,25 +124,25 @@ class _signUpPageState extends State<signUpPage> {
                             !signUpNotifier.obsecureText;
                       },
                       child: signUpNotifier.obsecureText
-                          ? Icon(
+                          ? const Icon(
                               Icons.visibility_off,
                               color: Colors.black,
                             )
-                          : Icon(
+                          : const Icon(
                               Icons.visibility,
                               color: Colors.black,
                             ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       // Get.offAll use koresi jeno login page ba signup age theke back korle onno page a na jai karon login, signup page e jawar jonno already button deya ase
-                      onTap: () => Get.offAll(LoginPage()),
-                      child: ReusableText(
+                      onTap: () => Get.offAll(const LoginPage()),
+                      child: const ReusableText(
                         text: "Login",
                         style: TextStyle(
                             color: Colors.black,
@@ -151,7 +151,7 @@ class _signUpPageState extends State<signUpPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   CustomButton(

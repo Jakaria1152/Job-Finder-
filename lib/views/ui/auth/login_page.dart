@@ -6,7 +6,6 @@ import 'package:job_finder_app/views/common/app_bar.dart';
 import 'package:job_finder_app/views/common/custom_button.dart';
 import 'package:job_finder_app/views/common/custom_text_field.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
-import 'package:job_finder_app/views/ui/mainScreen.dart';
 import 'package:job_finder_app/views/ui/auth/signUp_page.dart';
 import 'package:provider/provider.dart';
 class LoginPage extends StatefulWidget {
@@ -52,8 +51,8 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.zero,
                 children: [
                   const SizedBox(height: 50,),
-                  ReusableText(text: 'Welcome Back!', style: const TextStyle(fontSize: 30,fontWeight: FontWeight.w600, color: Colors.black)),
-                  ReusableText(text: 'Fill the details to login to your account', style: const TextStyle(
+                  const ReusableText(text: 'Welcome Back!', style: TextStyle(fontSize: 30,fontWeight: FontWeight.w600, color: Colors.black)),
+                  const ReusableText(text: 'Fill the details to login to your account', style: TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
                       fontWeight: FontWeight.w600
@@ -98,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: GestureDetector(
                       // Get.offAll use koresi jeno login page ba signup age theke back korle onno page a na jai karon login, signup page e jawar jonno already button deya ase
                       onTap: ()=>Get.offAll(const signUpPage()),
-                      child: ReusableText(text: "Register",style: const TextStyle(
+                      child: const ReusableText(text: "Register",style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                           fontWeight: FontWeight.w500
@@ -124,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                               "Please fill this field",
                               colorText: Colors.white,
                               backgroundColor: Colors.red,
-                              icon: Icon(Icons.add_alert)
+                              icon: const Icon(Icons.add_alert)
                           );
                         }
 

@@ -5,7 +5,7 @@ class ReusableText extends StatelessWidget {
   final TextStyle style;
 
 
-  ReusableText({super.key, required this.text, required this.style});
+  const ReusableText({super.key, required this.text, required this.style});
 
   @override
   Widget build(BuildContext context) {

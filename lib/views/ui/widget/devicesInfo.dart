@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:job_finder_app/views/common/customOutlineBtn.dart';
-import 'package:job_finder_app/views/common/custom_button.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
 
 class DevicesInfo extends StatelessWidget {
@@ -16,25 +15,25 @@ class DevicesInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ReusableText(text: platform, style: TextStyle(
+        ReusableText(text: platform, style: const TextStyle(
           fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold
         )),
 
-        ReusableText(text: device, style: TextStyle(
+        ReusableText(text: device, style: const TextStyle(
             fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold
         )),
 
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ReusableText(text: date, style: TextStyle(
+                ReusableText(text: date, style: const TextStyle(
                     fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w400
                 )),
-                ReusableText(text: ipAddress, style: TextStyle(
+                ReusableText(text: ipAddress, style: const TextStyle(
                     fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w400
                 )),
               ],

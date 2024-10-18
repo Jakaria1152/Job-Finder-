@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/model/response/job/jobs_response.dart';
 import 'package:job_finder_app/views/common/VerticalTile.dart';
-import 'package:job_finder_app/views/common/custom_text_field.dart';
-import 'package:job_finder_app/views/common/reusable_text.dart';
 import 'package:job_finder_app/views/ui/Jobs/job_page.dart';
 import 'package:job_finder_app/views/ui/widget/customField.dart';
 
@@ -12,7 +10,7 @@ import '../../common/search_loader.dart';
 
 class SearchPage extends StatefulWidget {
 
-  SearchPage({super.key});
+  const SearchPage({super.key});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -26,7 +24,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
 appBar: AppBar(
   backgroundColor: Colors.deepOrange,
-  iconTheme: IconThemeData(color: Colors.white),  // all item color white kore dibe
+  iconTheme: const IconThemeData(color: Colors.white),  // all item color white kore dibe
   title: CustomField(
     search: search,
     hintText: "Search for a Job",
@@ -36,7 +34,7 @@ setState(() {
 
 });
     },
-    child: Icon(Icons.search,size: 25,color: Colors.white,),
+    child: const Icon(Icons.search,size: 25,color: Colors.white,),
   ),
   ),
   elevation: 0,
@@ -47,7 +45,7 @@ setState(() {
             builder: (context, snapshot) {
               if (snapshot.connectionState ==
                   ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator(),);
+                return const Center(child: CircularProgressIndicator(),);
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text('Error is: ${snapshot.error}'),
@@ -76,8 +74,8 @@ setState(() {
                 },);
               }
           },)
-          : Center(
-        child: const SearchLoading(text: 'Start Searching for Jobs',),
+          : const Center(
+        child: SearchLoading(text: 'Start Searching for Jobs',),
       ),
     );
   }

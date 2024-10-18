@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_finder_app/model/request/Bookmark/bookmark_request.dart';
@@ -16,23 +15,17 @@ class BookMarkNotifier extends ChangeNotifier{
   }
   Future<void> addJob(String jobId)async{
     final prefs = await SharedPreferences.getInstance();
-    if(_jobs != null)
-      {
-        _jobs.insert(0, jobId);
-        prefs.setStringList("jobId", _jobs);
-        notifyListeners();
+      _jobs.insert(0, jobId);
+      prefs.setStringList("jobId", _jobs);
+      notifyListeners();
       }
-  }
 
   Future<void> removeJob(String jobId)async{
     final prefs = await SharedPreferences.getInstance();
-    if(_jobs != null)
-    {
-      _jobs.remove(jobId);
-      prefs.setStringList("jobId", _jobs);
-      notifyListeners();
+    _jobs.remove(jobId);
+    prefs.setStringList("jobId", _jobs);
+    notifyListeners();
     }
-  }
 
   Future<void> loadJobs()async{
     final prefs = await SharedPreferences.getInstance();

@@ -46,7 +46,7 @@ class _ChatPageState extends State<ChatPage> {
           if(_scrollController.position.maxScrollExtent ==
           _scrollController.position.pixels)
             {
-              print('<<><><><Loading><><><>>');
+            //  print('<<><><><Loading><><><>>');
               if(messages.length >= 12)
                 {
                   getMessages(offset++);
@@ -76,7 +76,7 @@ class _ChatPageState extends State<ChatPage> {
     socket?.emit('setup', chatNotifier.userId);
     socket!.connect();
     socket!.onConnect((_) {
-      print('Connect to Backend Successfully>>>');
+     // print('Connect to Backend Successfully>>>');
       // check user online or not
       socket?.on('online-user', (userId) {
         // Removes the objects in the range from start to end, then inserts the elements of replacements at start.
@@ -182,23 +182,12 @@ result =
       // print('userId: ${chatNotifier.userId}');
       return Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(50),
+            preferredSize: const Size.fromHeight(50),
             child: CustomAppbar(
               text: !chatNotifier.typing ? widget.title: "typing....",
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: GestureDetector(
-                  onTap: () {
-                    // this method not work to show updated message
-                    // Get.back(); // back previous page
-                    Get.to(()=>const MainScreen()); // show updated message in subtitle chatlist
-                  },
-                  child: Icon(Icons.arrow_back),
-                ),
-              ),
               actions: [
                 Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Stack(
                     children: [
                       CircleAvatar(
@@ -216,11 +205,22 @@ result =
                   ),
                 )
               ],
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: GestureDetector(
+                  onTap: () {
+                    // this method not work to show updated message
+                    // Get.back(); // back previous page
+                    Get.to(()=>const MainScreen()); // show updated message in subtitle chatlist
+                  },
+                  child: const Icon(Icons.arrow_back),
+                ),
+              ),
             ),
           ),
           body: SafeArea(
               child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
               children: [
                 Expanded(
@@ -229,7 +229,7 @@ result =
                   future: msgList,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else if (snapshot.hasError) {
@@ -237,7 +237,7 @@ result =
                         child: Text('Error is: ${snapshot.error}'),
                       );
                     } else if (snapshot.data!.isEmpty) {
-                      return SearchLoading(text: "You do not have message");
+                      return const SearchLoading(text: "You do not have message");
                     } else {
                       final msgList = snapshot.data;
                       messages = messages + msgList!;
@@ -245,22 +245,22 @@ result =
                         // very useful for chat application
                         reverse: true, // if miss this message format like opposite
                         controller: _scrollController,
-                        padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
                           final data = messages[index];
 
                           return Padding(
-                            padding: EdgeInsets.only(top: 8, bottom: 12),
+                            padding: const EdgeInsets.only(top: 8, bottom: 12),
                             child: Column(
                               children: [
                                 ReusableText(
                                     text: chatNotifier.showTimeAgo(messages[index].updatedAt.toString()),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 12,
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal)),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 ChatBubble(
@@ -284,7 +284,7 @@ result =
                                         BoxConstraints(maxWidth: width * 0.8),
                                     child: Text(
                                          data.content,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 14,
                                             color: Colors.white,
                                             fontWeight: FontWeight.normal,
@@ -313,7 +313,7 @@ result =
                         // message send function call
                         sendMessage(msg, widget.id, receiver);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.send,
                         size: 24,
                         color: Colors.lightBlue,

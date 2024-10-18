@@ -11,12 +11,12 @@ class SearchLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/icon/optimized search.jpg', fit: BoxFit.cover,),
-            ReusableText(text: text, style: TextStyle(
+            ReusableText(text: text, style: const TextStyle(
                 fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold
             ))
           ],

@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:job_finder_app/model/response/job/jobs_response.dart';
@@ -18,21 +17,17 @@ class JobHelper{
           headers: requestHeaders);
     }catch(e)
     {
-      print('api call error: $e');
+      //print('api call error: $e');
     }
 
     if(response!.statusCode == 200)
     {
-      var jobsList;
+      List<JobsResponse> jobsList;
       // all time compare response data to model data. If any variable miss make it nullable
       // print(jsonDecode(response.body)); // this is helpful when not find proper error in response data
 
-      try{
+     // don't use try catch block here
         jobsList = jobsResponseFromJson(response.body);
-      }catch(e)
-      {
-        print('error is $e');
-      }
 
       return jobsList;
     }
@@ -53,21 +48,18 @@ class JobHelper{
           headers: requestHeaders);
     }catch(e)
     {
-      print('api call error: $e');
+      //print('api call error: $e');
     }
 
     if(response!.statusCode == 200)
     {
-      var jobsList;
-      var recent;
-           try{
+      List<JobsResponse> jobsList;
+      JobsResponse recent;
+
         jobsList = jobsResponseFromJson(response.body);
         // last insert kora job ta first a thakbe tai aitake recent er modde neya hosse
         recent = jobsList.first;
-      }catch(e)
-      {
-        print('error is $e');
-      }
+
 
       return recent;
     }
@@ -88,7 +80,7 @@ class JobHelper{
           headers: requestHeaders);
     }catch(e)
     {
-      print('api call error: $e');
+      //print('api call error: $e');
     }
 
     if(response!.statusCode == 200)
@@ -127,22 +119,20 @@ class JobHelper{
           headers: requestHeaders);
     }catch(e)
     {
-      print('api call error: $e');
+      //print('api call error: $e');
     }
 
     if(response!.statusCode == 200)
     {
 
-      var jobsList;
+      List<JobsResponse> jobsList;
       // all time compare response data to model data. If any variable miss make it nullable
       // print(jsonDecode(response.body)); // this is helpful when not find proper error in response data
 
-      try{
+
+        // here not use try catch block, if use get an error because flutter think jobsList is null
         jobsList = jobsResponseFromJson(response.body);
-      }catch(e)
-      {
-        print('error is $e');
-      }
+
 
       return jobsList;
     }

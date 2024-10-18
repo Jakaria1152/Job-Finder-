@@ -16,15 +16,15 @@ class ImageUploader extends ChangeNotifier {
   List<String> imageFil = [];
 
   void pickImage() async {
-    XFile? _imageFile = await _picker.pickImage(source: ImageSource.gallery);
+    XFile? imageFile = await _picker.pickImage(source: ImageSource.gallery);
 
-    _imageFile = await cropImage(_imageFile!);
+    imageFile = await cropImage(imageFile!);
 
-    if (_imageFile != null) {
-      imageFil.add(_imageFile.path);
+    if (imageFile != null) {
+      imageFil.add(imageFile.path);
       // ai function upload function ke call korbe image store korar jonno
-     imageUpload(_imageFile);
-      imagePath = _imageFile.path;
+     imageUpload(imageFile);
+      imagePath = imageFile.path;
     } else {
       return;
     }

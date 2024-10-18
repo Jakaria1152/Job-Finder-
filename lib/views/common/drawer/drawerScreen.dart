@@ -82,11 +82,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
         widget.indexSetter(index);  // see carefully. because index value assign in final parameter
       },
       child: Container(
-        margin: EdgeInsets.only(left: 20, bottom: 20),
+        margin: const EdgeInsets.only(left: 20, bottom: 20),
         child: Row(
           children: [
             Icon(iconData,color: color,),
-            SizedBox(width: 12,),
+            const SizedBox(width: 12,),
             ReusableText(text: label, style: TextStyle(color: color,fontSize: 12,fontWeight: FontWeight.bold))
           ],
         ),

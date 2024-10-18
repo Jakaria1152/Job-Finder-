@@ -12,7 +12,7 @@ class VerticalTile extends StatelessWidget {
     return GestureDetector(
 onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
         height: MediaQuery.of(context).size.height*0.18,
         width: double.infinity,
         color: Colors.blueGrey,
@@ -28,21 +28,21 @@ onTap: onTap,
                   backgroundColor: Colors.grey,
                   backgroundImage: NetworkImage(job.imageUrl),
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ReusableText(text: job.company, style: TextStyle(
+                    ReusableText(text: job.company, style: const TextStyle(
                       fontSize: 20,color: Colors.black, fontWeight: FontWeight.w600
                     )),
                     SizedBox(width: MediaQuery.of(context).size.width*0.5,
-                    child:ReusableText(text: job.title, style: TextStyle(
+                    child:ReusableText(text: job.title, style: const TextStyle(
                         fontSize: 20,color: Colors.black, fontWeight: FontWeight.w600
                     )) ,)
                   ],
                 ),
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 18,
                   backgroundColor: Colors.white,
                   child: Icon(Icons.chevron_right),
@@ -53,12 +53,12 @@ onTap: onTap,
               padding: const EdgeInsets.only(left: 12),
               child: Row(
                 children: [
-                  ReusableText(text: job.salary, style: TextStyle(
+                  ReusableText(text: job.salary, style: const TextStyle(
                     color: Colors.black,
                     fontSize: 23,
                     fontWeight: FontWeight.w600
                   )),
-                  ReusableText(text: "/monthly", style: TextStyle(
+                  const ReusableText(text: "/monthly", style: TextStyle(
                       color: Colors.grey,
                       fontSize: 23,
                       fontWeight: FontWeight.w600

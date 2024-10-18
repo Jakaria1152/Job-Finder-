@@ -38,7 +38,7 @@ void main()async{
       ChangeNotifierProvider(create: (context) => JobNotifier(),),
       ChangeNotifierProvider(create: (context) => BookMarkNotifier(),),
       ChangeNotifierProvider(create: (context) => ChatNotifier(),),
-    ],child: myApp(),)
+    ],child: const myApp(),)
   );
 }
 

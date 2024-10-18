@@ -2,7 +2,6 @@
 //
 //     final initialChat = initialChatFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 InitialChat initialChatFromJson(String str) => InitialChat.fromJson(json.decode(str));
