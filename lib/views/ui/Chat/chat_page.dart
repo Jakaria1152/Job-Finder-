@@ -255,8 +255,7 @@ result =
                             child: Column(
                               children: [
                                 ReusableText(
-                                    text: chatNotifier.msgTime(
-                                        data!.chat!.updatedAt.toString()),
+                                    text: chatNotifier.showTimeAgo(messages[index].updatedAt.toString()),
                                     style: TextStyle(
                                         fontSize: 12,
                                         color: Colors.black,

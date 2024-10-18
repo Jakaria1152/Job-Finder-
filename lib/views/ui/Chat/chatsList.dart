@@ -33,7 +33,7 @@ class ChatsList extends StatelessWidget {
           // first time call so that get data from backend to List
           chatNotifier.getChats();
           chatNotifier.getPrefs();
-          print(chatNotifier.userId);
+          // print(chatNotifier.userId);
           return FutureBuilder<List<GetChats>>(
             future: chatNotifier
                 .chats, // access List which get data backend from before
@@ -121,7 +121,7 @@ class ChatsList extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 // message updated time show korbe
-                                ReusableText(text: chatNotifier.msgTime(chat!.updatedAt.toString()),
+                                ReusableText(text: chatNotifier.showTimeAgo(chat!.updatedAt.toString()),
                                     style: TextStyle(fontSize: 12,
                                         color: Colors.black, fontWeight: FontWeight.normal)),
                                 

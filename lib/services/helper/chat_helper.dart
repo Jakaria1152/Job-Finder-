@@ -22,15 +22,18 @@ class Chathelper{
       "x-auth-token": '$token'  // this is x-auth-token same as backend req.header("x-auth-token");
     };
     try{
+
       response = await http.post(
         Uri.parse('${Config.apiUrl}${Config.chatsUrl}'),
         headers: requestHeaders,
-        body: model.toJson()
+        body: jsonEncode({
+          "userId": model.userId
+        })  // be careful to use jsonEncode
       )
       ;
     }catch(e)
     {
-      print('BookMark Add api call error: $e');
+      print('Create Chat api call error: $e');
     }
 
     if(response!.statusCode == 200)
@@ -64,7 +67,7 @@ class Chathelper{
       ;
     }catch(e)
     {
-      print('BookMark Add api call error: $e');
+      print('Get Conversation Add api call error: $e');
     }
 
     if(response!.statusCode == 200)

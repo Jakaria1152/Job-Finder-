@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,8 +7,13 @@ import 'package:job_finder_app/constants/constant.dart';
 import 'package:job_finder_app/controllers/bookmark_provider.dart';
 import 'package:job_finder_app/controllers/job_provider.dart';
 import 'package:job_finder_app/model/request/Bookmark/bookmark_request.dart';
+import 'package:job_finder_app/model/request/Chat/create_chat.dart';
+import 'package:job_finder_app/model/request/Message/send_message.dart';
+import 'package:job_finder_app/services/helper/chat_helper.dart';
+import 'package:job_finder_app/services/helper/messaging_helper.dart';
 import 'package:job_finder_app/views/common/app_bar.dart';
 import 'package:job_finder_app/views/common/reusable_text.dart';
+import 'package:job_finder_app/views/ui/mainScreen.dart';
 import 'package:provider/provider.dart';
 
 class JobPage extends StatefulWidget {
@@ -71,6 +78,7 @@ class _JobPageState extends State<JobPage> {
               } else {
                 // snapshot data ke job variable er vitore neya hosse
                 final job = snapshot.data;
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Stack(
@@ -212,7 +220,31 @@ class _JobPageState extends State<JobPage> {
                           style: OutlinedButton.styleFrom(
                               backgroundColor: Colors.deepOrange,
                               foregroundColor: Colors.white),
-                          onPressed: () {},
+                          onPressed: () {
+
+                            // when click apply button automatically send a formal message to the agent
+                            // then job seeker can chat with agent
+                            // at first create chat using agent ID
+
+                            CreateChat model = CreateChat(userId: job.agentId!);
+                            //return [true, chatId];
+                            Chathelper.apply(model).then((response){
+                              if(response[0])
+                                {
+                                  // create send message model
+                                  SendMessage model = SendMessage(
+                                      content: "Hello, I am interested in ${job.title} job in ${job.location}",
+                                      chatId: response[1],
+                                      receiver: job.agentId!);
+
+                                  // send message
+                                  MessagingHelper.sendMessage(model).whenComplete((){ // very useful
+                                    // when this operation complete. Navigate to other page
+                                    Get.to(()=>const MainScreen());
+                                  });
+                                }
+                            });
+                          },
                           child: Text('Apply Now'),
                         ),
                       ),
