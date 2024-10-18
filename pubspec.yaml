@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   provider: ^6.1.2
   get: ^4.6.6
-  flutter_zoom_drawer: ^3.2.0
+  flutter_zoom_drawer: ^3.2.0       # very beautiful zoom drawer
   flutter_svg: ^2.0.10+1
   font_awesome_flutter: ^10.7.0
   http: ^1.2.2
@@ -50,9 +50,9 @@ dependencies:
   firebase_storage: ^12.3.2
   uuid: ^4.5.1
   flutter_animate: ^4.5.0
-  intl: ^0.19.0               # for dateTime calculation
+  intl: ^0.19.0               # for dateTime calculation (not very useful)
   ionicons: ^0.2.2            # for more icons use
-  flutter_chat_bubble: ^2.0.2
+  flutter_chat_bubble: ^2.0.2     # aita use korle message bubble auto generate hoi like telegram/ whatsapp
   socket_io_client: ^3.0.0      # real time data change based on database (very useful)
   timeago: ^3.7.0           # this package is use to calculate time (very useful for chat app)
 
