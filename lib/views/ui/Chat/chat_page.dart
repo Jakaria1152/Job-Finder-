@@ -282,12 +282,18 @@ result =
                                   child: Container(
                                     constraints:
                                         BoxConstraints(maxWidth: width * 0.8),
-                                    child: ReusableText(
-                                        text: data.content,
+                                    child: Text(
+                                         data.content,
                                         style: TextStyle(
                                             fontSize: 14,
                                             color: Colors.white,
-                                            fontWeight: FontWeight.normal)),
+                                            fontWeight: FontWeight.normal,
+                                        ),
+                                      // you miss this code message show only one line not entire message show
+                                      softWrap: true, // Ensures text wraps properly
+                                      maxLines: null, // Allow unlimited lines
+                                      overflow: TextOverflow.visible, // Avoids cutting off text
+                                    ),
                                   ),
                                 )
                               ],
